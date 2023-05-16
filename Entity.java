@@ -1,14 +1,21 @@
+import java.net.*;
 
 /**
  * Beschreiben Sie hier die Klasse Entity.
  * 
- * @author (Ihr Name) 
- * @version (eine Versionsnummer oder ein Datum)
+ * @author Simon Schneider + Maximilian Edenhofer 
+ * @version 1.0
  */
 public class Entity
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
-    private int x;
+    private int pos_x;
+    private int pos_y;
+    
+    private int speed;
+    private URL pfad_img_1;
+    private URL pfad_img_2;
+    
 
     /**
      * Konstruktor für Objekte der Klasse Entity
@@ -16,7 +23,7 @@ public class Entity
     public Entity()
     {
         // Instanzvariable initialisieren
-        x = 0;
+
     }
 
     /**
@@ -28,6 +35,6 @@ public class Entity
     public int beispielMethode(int y)
     {
         // tragen Sie hier den Code ein
-        return x + y;
+        return 0;
     }
 }
