@@ -11,9 +11,8 @@ public class Fenster extends JFrame implements ActionListener
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     private JLabel labelPunkte;
-
-    private JLabel dinoBild;
-    URL kaktus_url = this.getClass().getResource("kaktus.png");
+    
+    private Entity dino;
 
     private JLabel labelAnmelden;
     private JTextField bn;
@@ -34,16 +33,11 @@ public class Fenster extends JFrame implements ActionListener
         labelPunkte.setSize(200,50);
         labelPunkte.setFont(labelPunkte.getFont().deriveFont(46f));
         
-        // dinoBild
-        dinoBild = new JLabel();
-        dinoBild.setIcon(new ImageIcon(kaktus_url));
-        dinoBild.setLocation(20,300);
-        dinoBild.setSize(300,300);
         
-        
+        dino = new Dino();
         // labelPunkte, dinoBild hinzufügen
         super.add(labelPunkte);
-        super.add(dinoBild);
+        super.add(dino.gibBild());
         
         //---------------------Anmelden------------------------
         labelAnmelden = new JLabel();
@@ -104,6 +98,9 @@ public class Fenster extends JFrame implements ActionListener
     public void AnmeldenAufbauen(){
         // Anmelden sichtbar
         labelAnmelden.setVisible(true);
+        bn.setVisible(true);
+        pw.setVisible(true);
+        buttonweiter.setVisible(true);
         labelPunkte.setVisible(false);
     }
     

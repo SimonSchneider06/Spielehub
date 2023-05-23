@@ -1,4 +1,5 @@
 import java.net.*;
+import javax.swing.*;
 
 /**
  * Beschreiben Sie hier die Klasse Entity.
@@ -12,18 +13,31 @@ public class Entity
     private int pos_x;
     private int pos_y;
     
+    protected JComponent anzeige;
+    
     private int speed;
     private URL pfad_img_1;
     private URL pfad_img_2;
     
+    private JLabel bild;
+    URL bild_url;
 
     /**
      * Konstruktor für Objekte der Klasse Entity
      */
-    public Entity()
+    public Entity(String bild_pfad, int x, int y, int size_x, int size_y)
     {
         // Instanzvariable initialisieren
-
+        // dinoBild
+        bild_url = this.getClass().getResource(bild_pfad);
+        
+        bild = new JLabel();
+        bild.setIcon(new ImageIcon(bild_url));
+        bild.setLocation(x,y);
+        bild.setSize(size_x, size_y);        
+        
+        
+        
     }
 
     /**
@@ -36,5 +50,8 @@ public class Entity
     {
         // tragen Sie hier den Code ein
         return 0;
+    }
+    JLabel gibBild(){
+        return bild;
     }
 }
