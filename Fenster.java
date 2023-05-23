@@ -91,6 +91,9 @@ public class Fenster extends JFrame implements ActionListener
     public void AnmeldenAufbauen(){
         // Anmelden sichtbar
         labelAnmelden.setVisible(true);
+        bn.setVisible(true);
+        pw.setVisible(true);
+        buttonweiter.setVisible(true);
         labelPunkte.setVisible(false);
     }
     
