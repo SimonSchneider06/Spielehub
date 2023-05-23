@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.awt.event.*;
-
+import java.net.*;
 /**
  * Beschreiben Sie hier die Klasse Spielfeld.
  * 
@@ -11,7 +11,8 @@ public class Fenster extends JFrame implements ActionListener
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     private JLabel labelPunkte;
-    
+    private JLabel dinoBild;
+    URL kaktus_url = this.getClass().getResource("kaktus.png");
     
     /**
      * Konstruktor für Objekte der Klasse Spielfeld
@@ -26,8 +27,16 @@ public class Fenster extends JFrame implements ActionListener
         labelPunkte.setSize(200,50);
         labelPunkte.setFont(labelPunkte.getFont().deriveFont(46f));
         
-        // labelPunkte hinzufügen
+        // dinoBild
+        dinoBild = new JLabel();
+        dinoBild.setIcon(new ImageIcon(kaktus_url));
+        dinoBild.setLocation(20,300);
+        dinoBild.setSize(300,300);
+        
+        
+        // labelPunkte, dinoBild hinzufügen
         super.add(labelPunkte);
+        super.add(dinoBild);
         
         SpielfeldAufbauen();
         
