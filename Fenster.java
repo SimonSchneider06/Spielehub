@@ -18,12 +18,15 @@ public class Fenster extends JFrame implements ActionListener
      */
     public Fenster()
     {
+        //---------------------für Spielfeld------------------------
         // Punkte label
         labelPunkte = new JLabel();
         labelPunkte.setText("Punkte: ");
         labelPunkte.setLocation(20,20);
+        labelPunkte.setSize(200,50);
+        labelPunkte.setFont(labelPunkte.getFont().deriveFont(46f));
         
-        // label hinzufügen
+        // labelPunkte hinzufügen
         super.add(labelPunkte);
         
         SpielfeldAufbauen();
