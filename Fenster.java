@@ -11,7 +11,7 @@ public class Fenster extends JFrame implements ActionListener
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     private JLabel labelPunkte;
-    
+
     private Entity dino;
 
     private JLabel labelAnmelden;
