@@ -12,46 +12,69 @@ public class Entity
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     private int pos_x;
     private int pos_y;
-    
-    protected JComponent anzeige;
+
+    private int size_x;
+    private int size_y;
     
     private int speed;
-    private URL pfad_img_1;
-    private URL pfad_img_2;
     
     private JLabel bild;
-    URL bild_url;
+    String bild_ordner_pfad;
+    int img_number; 
 
     /**
      * Konstruktor für Objekte der Klasse Entity
      */
-    public Entity(String bild_pfad, int x, int y, int size_x, int size_y)
+    public Entity(String bild_ordner_pfad, int pos_x, int pos_y, int size_x, int size_y)
     {
         // Instanzvariable initialisieren
         // dinoBild
-        bild_url = this.getClass().getResource(bild_pfad);
-        
-        bild = new JLabel();
-        bild.setIcon(new ImageIcon(bild_url));
-        bild.setLocation(x,y);
-        bild.setSize(size_x, size_y);        
-        
-        
+        bild_ordner_pfad = bild_ordner_pfad;
+        size_x = size_x;
+        size_y = size_y;
+        img_number = 1;
+        bild = setBild(bild_ordner_pfad + img_number + ".png", pos_x, pos_y);
         
     }
 
     /**
-     * Ein Beispiel einer Methode - ersetzen Sie diesen Kommentar mit Ihrem eigenen
-     * 
-     * @param  y    ein Beispielparameter für eine Methode
-     * @return        die Summe aus x und y
+     *  Bewegt die Entitäten nach links(Kakteen,...)
      */
-    public int beispielMethode(int y)
+    protected void Move_left()
     {
-        // tragen Sie hier den Code ein
-        return 0;
+        pos_x -= speed;
+    }
+    /**
+     *  Animiert die Entitäten
+     *  Wechselt zwischen Ihren Bildern
+     */
+    protected void Animate(){
+        if(img_number == 1){
+            img_number += 1;
+        }
+        else{
+            img_number = 1;
+        }
+        // setBild mit nächstem Bild
+        setBild(bild_ordner_pfad + img_number + ".png",pos_x, pos_y);
+    }
+    /**
+     * Setzt Bild der Entity --> für Animation, um Bilder zu switchen
+     */
+    protected JLabel setBild(String img_pfad, int pos_x, int pos_y){
+        URL url = this.getClass().getResource(img_pfad);
+        
+        bild = new JLabel();
+        bild.setIcon(new ImageIcon(url));
+        bild.setLocation(pos_x,pos_y);
+        bild.setSize(size_x, size_y); 
+        return bild;
     }
     JLabel gibBild(){
         return bild;
+    }
+    public void Update(){
+        Move_left();
+        Animate();
     }
 }

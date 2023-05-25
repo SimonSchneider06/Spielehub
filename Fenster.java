@@ -4,15 +4,15 @@ import java.net.*;
 /**
  * Beschreiben Sie hier die Klasse Spielfeld.
  * 
- * @author (Ihr Name) 
- * @version (eine Versionsnummer oder ein Datum)
+ * @author Simon Schneider + Maximilian Edenhofer 
+ * @version 1.0
  */
-public class Fenster extends JFrame implements ActionListener
+public class Fenster extends JFrame implements ActionListener,MouseListener
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     private JLabel labelPunkte;
 
-    private Entity dino;
+    private Dino dino;
 
     private JLabel labelAnmelden;
     private JTextField bn;
@@ -97,9 +97,9 @@ public class Fenster extends JFrame implements ActionListener
         super.add(buttonSp1);
 
         
-       // SpielfeldAufbauen();
+       SpielfeldAufbauen();
        // AnmeldenAufbauen();
-        Spieleauswahl();
+        //Spieleauswahl();
         buttonweiter.addActionListener(this);
         // Fenster konfigurieren
         super.setLayout(null);
@@ -111,10 +111,21 @@ public class Fenster extends JFrame implements ActionListener
      * Zeigt das Spielfeld des Dinosaurierspiels an, wo der Dino rennt
      */
     public void SpielfeldAufbauen(){
-        // Punkte sichtbar
+        // sichtbar
         labelPunkte.setVisible(true);
+        dino.gibBild().setVisible(true);
+        
+        //unsichtbar
+        bn.setVisible(false);
+        pw.setVisible(false);
+        buttonweiter.setVisible(false);
+        labelSA.setVisible(false);
+        buttonSp1.setVisible(false);
         labelAnmelden.setVisible(false);
     }
+    /**
+     * Zeigt den Anmeldebildschirm
+     */
     public void AnmeldenAufbauen(){
         // Anmelden sichtbar
         labelAnmelden.setVisible(true);
@@ -125,6 +136,9 @@ public class Fenster extends JFrame implements ActionListener
         labelSA.setVisible(false);
        buttonSp1.setVisible(false);
     }
+    /**
+     * Zeigt die Spielauswahl
+     */
     public void Spieleauswahl(){
        labelSA.setVisible(true);
        buttonSp1.setVisible(true);
@@ -136,6 +150,16 @@ public class Fenster extends JFrame implements ActionListener
         
     }
 
+    public void mousePressed(MouseEvent e) {}
+
+    public void mouseReleased(MouseEvent e) {}
+
+    public void mouseEntered(MouseEvent e) {}
+
+    public void mouseExited(MouseEvent e) {}
+
+    public void mouseClicked(MouseEvent e) {
+    }
     
     /**
      * Registriert button presses, ect

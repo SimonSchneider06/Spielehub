@@ -15,7 +15,18 @@ public class Dino extends Entity
     public Dino()
     {
         // Instanzvariable initialisieren
-        super("kaktus.png",20,300,100,100);
+        super("Bilder/Dino/",20,300,100,100);
     }
 
+    /**
+     * lässt den Dino bei input springen
+     */
+    private void input(){
+    
+    }
+    
+    @Override public void Update(){
+        input();
+        Animate();
+    }
 }
