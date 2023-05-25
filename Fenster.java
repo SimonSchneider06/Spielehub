@@ -18,6 +18,8 @@ public class Fenster extends JFrame implements ActionListener
     private JTextField bn;
     private JTextField pw;
     private JButton buttonweiter;
+    private JButton buttonSp1;
+    private JLabel labelSA;
     
     /**
      * Konstruktor für Objekte der Klasse Spielfeld
@@ -75,10 +77,29 @@ public class Fenster extends JFrame implements ActionListener
         super.add(bn);
         super.add(pw);
         super.add(buttonweiter);
+                //---------------------Spieleauswahl(SA)------------------------
+        
+        labelSA = new JLabel();
+        labelSA.setText("Spieleauswahl: ");
+        labelSA.setLocation(20,20);
+        labelSA.setSize(350,50);
+        labelSA.setFont(labelSA.getFont().deriveFont(46f));
+        
+        buttonSp1 = new JButton();
+        buttonSp1.setText("Dinorun");
+        buttonSp1.setLocation(20, 100);
+        buttonSp1.setSize (100, 70);
+        buttonSp1.setEnabled(true);
+        buttonSp1.setFont(buttonSp1.getFont().deriveFont(56f));
+        buttonSp1.addActionListener(this);
+        
+        super.add(labelSA);
+        super.add(buttonSp1);
+
         
        // SpielfeldAufbauen();
-        AnmeldenAufbauen();
-        
+       // AnmeldenAufbauen();
+        Spieleauswahl();
         buttonweiter.addActionListener(this);
         // Fenster konfigurieren
         super.setLayout(null);
@@ -101,7 +122,20 @@ public class Fenster extends JFrame implements ActionListener
         pw.setVisible(true);
         buttonweiter.setVisible(true);
         labelPunkte.setVisible(false);
+        labelSA.setVisible(false);
+       buttonSp1.setVisible(false);
     }
+    public void Spieleauswahl(){
+       labelSA.setVisible(true);
+       buttonSp1.setVisible(true);
+       labelAnmelden.setVisible(false);
+        bn.setVisible(false);
+        pw.setVisible(false);
+        buttonweiter.setVisible(false);
+        labelPunkte.setVisible(false);
+        
+    }
+
     
     /**
      * Registriert button presses, ect
