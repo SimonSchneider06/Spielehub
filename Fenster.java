@@ -18,8 +18,6 @@ public class Fenster extends JFrame implements ActionListener
     private JTextField bn;
     private JTextField pw;
     private JButton buttonweiter;
-
-
     
     /**
      * Konstruktor für Objekte der Klasse Spielfeld
