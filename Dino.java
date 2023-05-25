@@ -15,7 +15,6 @@ public class Dino extends Entity
     public Dino()
     {
         // Instanzvariable initialisieren
-
         super("Bilder/dino_1.png",20,300,100,100);
 
     }
