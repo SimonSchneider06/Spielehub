@@ -17,9 +17,12 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
     private JLabel labelAnmelden;
     private JTextField bn;
     private JTextField pw;
-    private JButton buttonweiter;
+    private JButton buttonAnmelden;
+    private JButton buttonRegistrieren;
     private JButton buttonSp1;
     private JLabel labelSA;
+    private JLabel RErfolg;
+    private JButton buttonBestätigen;
     
     /**
      * Konstruktor für Objekte der Klasse Spielfeld
@@ -63,21 +66,46 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         pw.setEnabled(true);
         pw.setFont(pw.getFont().deriveFont(56f));
        
-        //Knopf
-        buttonweiter = new JButton();
-        buttonweiter.setText("Fortfahren");
-        buttonweiter.setLocation(320, 450);
-        buttonweiter.setSize (470, 50);
-        buttonweiter.setEnabled(true);
-        buttonweiter.setFont(buttonweiter.getFont().deriveFont(56f));
-        buttonweiter.addActionListener(this);
-        
+        //KnopfAnmelden
+        buttonAnmelden = new JButton();
+        buttonAnmelden.setText("Anmelden");
+        buttonAnmelden.setLocation(320, 520);
+        buttonAnmelden.setSize (470, 60);
+        buttonAnmelden.setEnabled(true);
+        buttonAnmelden.setFont(buttonAnmelden.getFont().deriveFont(56f));
+        buttonAnmelden.addActionListener(this);
+        //KnopfRegistrieren
+        buttonRegistrieren = new JButton();
+        buttonRegistrieren.setText("Registrieren");
+        buttonRegistrieren.setLocation(320,440);
+        buttonRegistrieren.setSize (470, 60);
+        buttonRegistrieren.setEnabled(true);
+        buttonRegistrieren.setFont(buttonRegistrieren.getFont().deriveFont(56f));
+        buttonRegistrieren.addActionListener(this);
         // Anmelden, Benutzernameeingabefeld,Passworteingabefeld, Knopf hinzufügen
         super.add(labelAnmelden);
         super.add(bn);
         super.add(pw);
-        super.add(buttonweiter);
-                //---------------------Spieleauswahl(SA)------------------------
+        super.add(buttonAnmelden);
+        super.add(buttonRegistrieren);
+         //---------------------Registrieren------------------------
+         RErfolg = new JLabel();
+        RErfolg.setText("Die Registrierung war erfolgreich!");
+        RErfolg.setLocation(300,40);
+        RErfolg.setSize (900, 200);       
+        RErfolg.setFont(RErfolg.getFont().deriveFont(46f));
+        
+        buttonBestätigen = new JButton();
+        buttonBestätigen.setText("Dinorun");
+        buttonBestätigen.setLocation(20, 100);
+        buttonBestätigen.setSize (100, 70);
+        buttonBestätigen.setEnabled(true);
+        buttonBestätigen.setFont(buttonBestätigen.getFont().deriveFont(56f));
+        buttonBestätigen.addActionListener(this);
+        
+        super.add(buttonBestätigen);
+        super.add(RErfolg);
+        //---------------------Spieleauswahl(SA)------------------------
         
         labelSA = new JLabel();
         labelSA.setText("Spieleauswahl: ");
@@ -97,10 +125,12 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         super.add(buttonSp1);
 
         
-       SpielfeldAufbauen();
-       // AnmeldenAufbauen();
+       // SpielfeldAufbauen();
+        AnmeldenAufbauen();
         //Spieleauswahl();
-        buttonweiter.addActionListener(this);
+        buttonAnmelden.addActionListener(this);
+        buttonRegistrieren.addActionListener(this);
+
         // Fenster konfigurieren
         super.setLayout(null);
         super.setSize(1300,750);
@@ -118,10 +148,11 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         //unsichtbar
         bn.setVisible(false);
         pw.setVisible(false);
-        buttonweiter.setVisible(false);
+        buttonAnmelden.setVisible(false);
         labelSA.setVisible(false);
         buttonSp1.setVisible(false);
         labelAnmelden.setVisible(false);
+        dino.gibBild().setVisible(false);
     }
     /**
      * Zeigt den Anmeldebildschirm
@@ -131,23 +162,27 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         labelAnmelden.setVisible(true);
         bn.setVisible(true);
         pw.setVisible(true);
-        buttonweiter.setVisible(true);
+        buttonAnmelden.setVisible(true);
+        buttonRegistrieren.setVisible(true);
         labelPunkte.setVisible(false);
         labelSA.setVisible(false);
        buttonSp1.setVisible(false);
+       dino.gibBild().setVisible(false);
     }
     /**
      * Zeigt die Spielauswahl
      */
     public void Spieleauswahl(){
+        // Spieleauswahl sichtbar
        labelSA.setVisible(true);
        buttonSp1.setVisible(true);
        labelAnmelden.setVisible(false);
         bn.setVisible(false);
         pw.setVisible(false);
-        buttonweiter.setVisible(false);
+        buttonAnmelden.setVisible(false);
+        buttonRegistrieren.setVisible(false);
         labelPunkte.setVisible(false);
-        
+        dino.gibBild().setVisible(false);
     }
 
     public void mousePressed(MouseEvent e) {}
@@ -165,6 +200,11 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
      * Registriert button presses, ect
      */
     public void actionPerformed(ActionEvent e){
+        if(e.getSource()==this.buttonAnmelden){
+        this.Spieleauswahl();
         
     }
+    else if(e.getSource()==this.buttonRegistrieren)
+    {
 }
+}}
