@@ -152,7 +152,9 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         labelSA.setVisible(false);
         buttonSp1.setVisible(false);
         labelAnmelden.setVisible(false);
-        dino.gibBild().setVisible(false);
+        
+        RErfolg.setVisible(false);
+        buttonBestätigen.setVisible(false);
     }
     /**
      * Zeigt den Anmeldebildschirm
@@ -168,6 +170,8 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         labelSA.setVisible(false);
        buttonSp1.setVisible(false);
        dino.gibBild().setVisible(false);
+       RErfolg.setVisible(false);
+        buttonBestätigen.setVisible(false);
     }
     /**
      * Zeigt die Spielauswahl
@@ -183,7 +187,26 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         buttonRegistrieren.setVisible(false);
         labelPunkte.setVisible(false);
         dino.gibBild().setVisible(false);
+        RErfolg.setVisible(false);
+        buttonBestätigen.setVisible(false);
     }
+        public void Registrieren(){
+        // Spieleauswahl sichtbar
+       
+        RErfolg.setVisible(true);
+        buttonBestätigen.setVisible(true);
+        labelSA.setVisible(false);
+       buttonSp1.setVisible(false);
+       labelAnmelden.setVisible(false);
+        bn.setVisible(false);
+        pw.setVisible(false);
+        buttonAnmelden.setVisible(false);
+        buttonRegistrieren.setVisible(false);
+        labelPunkte.setVisible(false);
+        dino.gibBild().setVisible(false);
+        
+     }
+    
 
     public void mousePressed(MouseEvent e) {}
 
