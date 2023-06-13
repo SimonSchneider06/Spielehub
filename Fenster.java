@@ -17,13 +17,16 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
     private JLabel labelAnmelden;
     private JTextField bn;
     private JTextField pw;
+    private JLabel pwÜberprüfen;
+    private JLabel bnÜberprüfen;
     private JButton buttonAnmelden;
     private JButton buttonRegistrieren;
     private JButton buttonSp1;
     private JLabel labelSA;
     private JLabel RErfolg;
     private JButton buttonBestätigen;
-    
+    private JButton buttonAbbrechen;
+   
     /**
      * Konstruktor für Objekte der Klasse Spielfeld
      */
@@ -91,20 +94,45 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
          //---------------------Registrieren------------------------
          RErfolg = new JLabel();
         RErfolg.setText("Die Registrierung war erfolgreich!");
-        RErfolg.setLocation(300,40);
+        RErfolg.setLocation(250,40);
         RErfolg.setSize (900, 200);       
         RErfolg.setFont(RErfolg.getFont().deriveFont(46f));
         
         buttonBestätigen = new JButton();
-        buttonBestätigen.setText("Dinorun");
-        buttonBestätigen.setLocation(20, 100);
-        buttonBestätigen.setSize (100, 70);
+        buttonBestätigen.setText("Bestätigen");
+        buttonBestätigen.setLocation(320, 440);
+        buttonBestätigen.setSize (470, 60);
         buttonBestätigen.setEnabled(true);
         buttonBestätigen.setFont(buttonBestätigen.getFont().deriveFont(56f));
         buttonBestätigen.addActionListener(this);
         
+        buttonAbbrechen = new JButton();
+        buttonAbbrechen.setText("Abbrechen");
+        buttonAbbrechen.setLocation(320, 520);
+        buttonAbbrechen.setSize (470, 60);
+        buttonAbbrechen.setEnabled(true);
+        buttonAbbrechen.setFont(buttonBestätigen.getFont().deriveFont(56f));
+        buttonAbbrechen.addActionListener(this);
+
+        
+        bnÜberprüfen = new JLabel();
+        bnÜberprüfen.setText("Benutzername");
+        bnÜberprüfen.setLocation(280,250);
+        bnÜberprüfen.setSize (550,80);
+        bnÜberprüfen.setFont(pw.getFont().deriveFont(56f));
+        
+        pwÜberprüfen = new JLabel();
+        pwÜberprüfen.setText("Passwort");
+        pwÜberprüfen.setLocation(280,330);
+        pwÜberprüfen.setSize (550,80);
+        pwÜberprüfen.setFont(pw.getFont().deriveFont(56f));
+        
+        
         super.add(buttonBestätigen);
         super.add(RErfolg);
+        super.add(bnÜberprüfen);
+        super.add(pwÜberprüfen);
+        super.add(buttonAbbrechen);
         //---------------------Spieleauswahl(SA)------------------------
         
         labelSA = new JLabel();
@@ -128,8 +156,11 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
        // SpielfeldAufbauen();
         AnmeldenAufbauen();
         //Spieleauswahl();
+        //Registrieren();
         buttonAnmelden.addActionListener(this);
         buttonRegistrieren.addActionListener(this);
+        buttonBestätigen.addActionListener(this);
+        buttonAbbrechen.addActionListener(this);
 
         // Fenster konfigurieren
         super.setLayout(null);
@@ -155,6 +186,10 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         
         RErfolg.setVisible(false);
         buttonBestätigen.setVisible(false);
+        
+        bnÜberprüfen.setVisible(false);
+        pwÜberprüfen.setVisible(false);
+        buttonAbbrechen.setVisible(false);
     }
     /**
      * Zeigt den Anmeldebildschirm
@@ -172,6 +207,9 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
        dino.gibBild().setVisible(false);
        RErfolg.setVisible(false);
         buttonBestätigen.setVisible(false);
+        bnÜberprüfen.setVisible(false);
+        pwÜberprüfen.setVisible(false);
+        buttonAbbrechen.setVisible(false);
     }
     /**
      * Zeigt die Spielauswahl
@@ -179,6 +217,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
     public void Spieleauswahl(){
         // Spieleauswahl sichtbar
        labelSA.setVisible(true);
+       
        buttonSp1.setVisible(true);
        labelAnmelden.setVisible(false);
         bn.setVisible(false);
@@ -189,12 +228,18 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         dino.gibBild().setVisible(false);
         RErfolg.setVisible(false);
         buttonBestätigen.setVisible(false);
+        bnÜberprüfen.setVisible(false);
+        pwÜberprüfen.setVisible(false);
+        buttonAbbrechen.setVisible(false);
+        
     }
         public void Registrieren(){
         // Spieleauswahl sichtbar
-       
+        bnÜberprüfen.setVisible(true);
+        pwÜberprüfen.setVisible(true);
         RErfolg.setVisible(true);
         buttonBestätigen.setVisible(true);
+        buttonAbbrechen.setVisible(true);
         labelSA.setVisible(false);
        buttonSp1.setVisible(false);
        labelAnmelden.setVisible(false);
@@ -204,6 +249,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         buttonRegistrieren.setVisible(false);
         labelPunkte.setVisible(false);
         dino.gibBild().setVisible(false);
+        
         
      }
     
@@ -229,5 +275,12 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
     }
     else if(e.getSource()==this.buttonRegistrieren)
     {
+        this.Registrieren();
+        
 }
+else if(e.getSource()==this.buttonAbbrechen)
+        {this.AnmeldenAufbauen();
+        }
+        else if(e.getSource()==this.buttonBestätigen)
+        {this.Spieleauswahl();}
 }}
