@@ -18,8 +18,9 @@ public class Entity
     
     private int speed;
     
-    private JLabel bild;
+    public JLabel bild;
     String bild_ordner_pfad;
+    String img_pfad;
     int img_number; 
 
     /**
@@ -32,9 +33,11 @@ public class Entity
         bild_ordner_pfad = bild_ordner_pfad;
         size_x = size_x;
         size_y = size_y;
+        pos_x = pos_x;
+        pos_y = pos_y;
         img_number = 1;
-        bild = setBild(bild_ordner_pfad + img_number + ".png", pos_x, pos_y);
-        
+        bild = setBild(bild_ordner_pfad + "1.png", pos_x, pos_y);
+        //bild = setBild(pos_x, pos_y);
     }
 
     /**
@@ -56,18 +59,18 @@ public class Entity
             img_number = 1;
         }
         // setBild mit nächstem Bild
-        setBild(bild_ordner_pfad + img_number + ".png",pos_x, pos_y);
+        bild = setBild("1.png",pos_x, pos_y);
     }
     /**
      * Setzt Bild der Entity --> für Animation, um Bilder zu switchen
      */
-    protected JLabel setBild(String img_pfad, int pos_x, int pos_y){
+    public JLabel setBild(String img_pfad,int pos_x, int pos_y){
         URL url = this.getClass().getResource(img_pfad);
-        
         bild = new JLabel();
         bild.setIcon(new ImageIcon(url));
         bild.setLocation(pos_x,pos_y);
-        bild.setSize(size_x, size_y); 
+        bild.setSize(size_x, size_y);
+        //bild.setFont(bild.getFont().deriveFont(46f));
         return bild;
     }
     JLabel gibBild(){

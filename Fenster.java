@@ -116,7 +116,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         buttonSp1 = new JButton();
         buttonSp1.setText("Dinorun");
         buttonSp1.setLocation(20, 100);
-        buttonSp1.setSize (100, 70);
+        buttonSp1.setSize (300, 70);
         buttonSp1.setEnabled(true);
         buttonSp1.setFont(buttonSp1.getFont().deriveFont(56f));
         buttonSp1.addActionListener(this);
@@ -230,4 +230,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
     else if(e.getSource()==this.buttonRegistrieren)
     {
 }
+    else if(e.getSource() == this.buttonSp1){
+        this.SpielfeldAufbauen();
+    }
 }}
