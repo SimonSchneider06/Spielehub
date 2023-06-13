@@ -1,3 +1,4 @@
+import javax.swing.*;
 
 /**
  * Beschreiben Sie hier die Klasse Dino.
