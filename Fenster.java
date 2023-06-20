@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.net.*;
 import java.util.concurrent.TimeUnit;
+
 /**
  * Beschreiben Sie hier die Klasse Spielfeld.
  * 
@@ -291,13 +292,6 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         
     }
     
-     /*
-        Game Loop
-        */
-    public static void gameLoop(){
-        int fps = 30;
-        
-    }
 
     public void mousePressed(MouseEvent e) {}
 
