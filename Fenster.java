@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.net.*;
+import java.util.concurrent.TimeUnit;
 /**
  * Beschreiben Sie hier die Klasse Spielfeld.
  * 
@@ -204,6 +205,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         pwÜberprüfen.setVisible(false);
         buttonAbbrechen.setVisible(false);
          buttonZurück.setVisible(false);
+         
     }
     /**
      * Zeigt den Anmeldebildschirm
@@ -251,25 +253,49 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
     }
         public void Registrieren(){
         // Spieleauswahl sichtbar
-        bnÜberprüfen.setVisible(true);
-        pwÜberprüfen.setVisible(true);
-        RErfolg.setVisible(true);
-        buttonBestätigen.setVisible(true);
-        buttonAbbrechen.setVisible(true);
-        labelSA.setVisible(false);
-       buttonSp1.setVisible(false);
-       labelAnmelden.setVisible(false);
-        bn.setVisible(false);
-        pw.setVisible(false);
-        buttonAnmelden.setVisible(false);
-        buttonRegistrieren.setVisible(false);
-        labelPunkte.setVisible(false);
-        dino.gibBild().setVisible(false);
-         buttonZurück.setVisible(false);
-        
+        DinoSpielGruppeSichtbar(false);
+        AnmeldeGruppeSichtbar(false);
+        RegistrierGruppeSichtbar(true);
+        SpielauswahlGruppeSichtbar(false);
         
      }
+     
+     void DinoSpielGruppeSichtbar(boolean sichtbar){
+         dino.gibBild().setVisible(sichtbar);
+         labelPunkte.setVisible(sichtbar);
+        }
+        
+    void AnmeldeGruppeSichtbar(boolean sichtbar){
+        labelAnmelden.setVisible(sichtbar);
+        bn.setVisible(sichtbar);
+        pw.setVisible(sichtbar);
+        buttonAnmelden.setVisible(sichtbar);
+        buttonRegistrieren.setVisible(sichtbar);
+    }
     
+    void RegistrierGruppeSichtbar(boolean sichtbar){
+        RErfolg.setVisible(sichtbar);
+        buttonBestätigen.setVisible(sichtbar);
+        buttonAbbrechen.setVisible(sichtbar);
+        bnÜberprüfen.setVisible(sichtbar);
+        pwÜberprüfen.setVisible(sichtbar);
+        
+    }
+    
+    void SpielauswahlGruppeSichtbar(boolean sichtbar){
+        labelSA.setVisible(sichtbar);
+        buttonSp1.setVisible(sichtbar);
+        buttonZurück.setVisible(sichtbar);
+        
+    }
+    
+     /*
+        Game Loop
+        */
+    public static void gameLoop(){
+        int fps = 30;
+        
+    }
 
     public void mousePressed(MouseEvent e) {}
 
