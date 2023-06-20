@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.net.*;
 import java.util.concurrent.TimeUnit;
+
 /**
  * Beschreiben Sie hier die Klasse Spielfeld.
  * 
@@ -29,7 +30,11 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
     private JButton buttonBestätigen;
     private JButton buttonAbbrechen;
     private JButton buttonAbmelden;
+
     private JButton buttonPÜ;
+
+    
+    private Thread gameLoop;
    
     /**
      * Konstruktor für Objekte der Klasse Spielfeld
@@ -172,6 +177,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         super.add(labelSA);
         super.add(buttonSp1);
         super.add(buttonAbmelden);
+
         super.add(buttonPÜ);
         
         //---------------------Punkteübersicht(PÜ)------------------------
@@ -181,7 +187,9 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         labelPÜ.setSize(300,50);
         labelPÜ.setFont(labelPÜ.getFont().deriveFont(46f));
         
-        
+        //------------------------gameloop--------------------
+        gameLoop = new Thread(new GameLoop(dino));
+
         
        // SpielfeldAufbauen();
         AnmeldenAufbauen();
@@ -248,6 +256,15 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
      void DinoSpielGruppeSichtbar(boolean sichtbar){
          dino.gibBild().setVisible(sichtbar);
          labelPunkte.setVisible(sichtbar);
+         if(sichtbar){
+             try{
+                TimeUnit.SECONDS.sleep(2);
+                gameLoop.start();
+                }
+            catch(Exception e){
+                System.out.println(e);
+                }
+            }
         }
         
     void AnmeldeGruppeSichtbar(boolean sichtbar){
@@ -274,7 +291,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         buttonPÜ.setVisible(sichtbar);
         
     }
-    
+
     void PunkteübersichtGruppeSichtbar(boolean sichtbar){
         
     
@@ -287,6 +304,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         int fps = 30;
         
     }
+
 
     public void mousePressed(MouseEvent e) {}
 

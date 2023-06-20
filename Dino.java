@@ -3,8 +3,8 @@ import javax.swing.*;
 /**
  * Beschreiben Sie hier die Klasse Dino.
  * 
- * @author (Ihr Name) 
- * @version (eine Versionsnummer oder ein Datum)
+ * @author Simon Schneider + Maximilan Edenhofer
+ * @version 1.0
  */
 public class Dino extends Entity
 {
@@ -16,14 +16,14 @@ public class Dino extends Entity
     public Dino()
     {
         // Instanzvariable initialisieren
-        super("Bilder/Dino/",300,300,100,100);
+        super("Bilder/Dino/",200,600,100,100);
     }
 
     /**
      * lässt den Dino bei input springen
      */
     private void input(){
-    
+        System.out.println("input");
     }
     
     @Override public void Update(){
