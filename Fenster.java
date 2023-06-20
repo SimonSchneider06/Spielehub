@@ -19,14 +19,14 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
     private JTextField pw;
     private JLabel pwÜberprüfen;
     private JLabel bnÜberprüfen;
+    private JLabel labelSA;
+    private JLabel RErfolg;
     private JButton buttonAnmelden;
     private JButton buttonRegistrieren;
     private JButton buttonSp1;
-    private JLabel labelSA;
-    private JLabel RErfolg;
     private JButton buttonBestätigen;
     private JButton buttonAbbrechen;
-    private JButton buttonZurück;
+    private JButton buttonAbmelden;
    
     /**
      * Konstruktor für Objekte der Klasse Spielfeld
@@ -150,17 +150,17 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         buttonSp1.setFont(buttonSp1.getFont().deriveFont(56f));
         buttonSp1.addActionListener(this);
         
-        buttonZurück = new JButton();
-        buttonZurück.setText("Abmelden");
-        buttonZurück.setLocation(800, 650);
-        buttonZurück.setSize (470, 60);
-        buttonZurück.setEnabled(true);
-        buttonZurück.setFont(buttonSp1.getFont().deriveFont(56f));
-        buttonZurück.addActionListener(this);
+        buttonAbmelden = new JButton();
+        buttonAbmelden.setText("Abmelden");
+        buttonAbmelden.setLocation(800, 650);
+        buttonAbmelden.setSize (470, 60);
+        buttonAbmelden.setEnabled(true);
+        buttonAbmelden.setFont(buttonSp1.getFont().deriveFont(56f));
+        buttonAbmelden.addActionListener(this);
         
         super.add(labelSA);
         super.add(buttonSp1);
-        super.add(buttonZurück);
+        super.add(buttonAbmelden);
 
 
         
@@ -172,7 +172,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         buttonRegistrieren.addActionListener(this);
         buttonBestätigen.addActionListener(this);
         buttonAbbrechen.addActionListener(this);
-        buttonZurück.addActionListener(this);
+        buttonAbmelden.addActionListener(this);
 
 
         // Fenster konfigurieren
@@ -203,7 +203,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         bnÜberprüfen.setVisible(false);
         pwÜberprüfen.setVisible(false);
         buttonAbbrechen.setVisible(false);
-         buttonZurück.setVisible(false);
+         buttonAbmelden.setVisible(false);
     }
     /**
      * Zeigt den Anmeldebildschirm
@@ -224,7 +224,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         bnÜberprüfen.setVisible(false);
         pwÜberprüfen.setVisible(false);
         buttonAbbrechen.setVisible(false);
-        buttonZurück.setVisible(false);
+        buttonAbmelden.setVisible(false);
     }
     /**
      * Zeigt die Spielauswahl
@@ -232,7 +232,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
     public void Spieleauswahl(){
         // Spieleauswahl sichtbar
        labelSA.setVisible(true);
-        buttonZurück.setVisible(true);
+        buttonAbmelden.setVisible(true);
        
        buttonSp1.setVisible(true);
        labelAnmelden.setVisible(false);
@@ -265,7 +265,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         buttonRegistrieren.setVisible(false);
         labelPunkte.setVisible(false);
         dino.gibBild().setVisible(false);
-         buttonZurück.setVisible(false);
+         buttonAbmelden.setVisible(false);
         
         
      }
@@ -307,7 +307,7 @@ else if(e.getSource()==this.buttonBestätigen)
 
         {this.Spieleauswahl();}
 
-        else if(e.getSource()==this.buttonZurück)
+else if(e.getSource()==this.buttonAbmelden)
         {this.AnmeldenAufbauen();}
 
 }}
