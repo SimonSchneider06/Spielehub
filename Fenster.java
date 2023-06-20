@@ -20,6 +20,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
     private JTextField pw;
     private JLabel pwÜberprüfen;
     private JLabel bnÜberprüfen;
+    private JLabel labelPÜ;
     private JLabel labelSA;
     private JLabel RErfolg;
     private JButton buttonAnmelden;
@@ -28,6 +29,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
     private JButton buttonBestätigen;
     private JButton buttonAbbrechen;
     private JButton buttonAbmelden;
+    private JButton buttonPÜ;
    
     /**
      * Konstruktor für Objekte der Klasse Spielfeld
@@ -151,6 +153,14 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         buttonSp1.setFont(buttonSp1.getFont().deriveFont(56f));
         buttonSp1.addActionListener(this);
         
+        buttonPÜ = new JButton();
+        buttonPÜ.setText("Punkteübersicht");
+        buttonPÜ.setLocation(50, 650);
+        buttonPÜ.setSize (600, 60);
+        buttonPÜ.setEnabled(true);
+        buttonPÜ.setFont(buttonPÜ.getFont().deriveFont(56f));
+        buttonPÜ.addActionListener(this);
+        
         buttonAbmelden = new JButton();
         buttonAbmelden.setText("Abmelden");
         buttonAbmelden.setLocation(800, 650);
@@ -162,8 +172,16 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         super.add(labelSA);
         super.add(buttonSp1);
         super.add(buttonAbmelden);
-
-
+        super.add(buttonPÜ);
+        
+        //---------------------Punkteübersicht(PÜ)------------------------
+        labelPÜ = new JLabel();
+        labelPÜ.setText("PÜ: ");
+        labelPÜ.setLocation(50,150);
+        labelPÜ.setSize(300,50);
+        labelPÜ.setFont(labelPÜ.getFont().deriveFont(46f));
+        
+        
         
        // SpielfeldAufbauen();
         AnmeldenAufbauen();
@@ -174,6 +192,8 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         buttonBestätigen.addActionListener(this);
         buttonAbbrechen.addActionListener(this);
         buttonAbmelden.addActionListener(this);
+        buttonPÜ.addActionListener(this);
+
 
 
         // Fenster konfigurieren
@@ -251,7 +271,13 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         labelSA.setVisible(sichtbar);
         buttonSp1.setVisible(sichtbar);
         buttonAbmelden.setVisible(sichtbar);
+        buttonPÜ.setVisible(sichtbar);
         
+    }
+    
+    void PunkteübersichtGruppeSichtbar(boolean sichtbar){
+        
+    
     }
     
      /*
@@ -299,6 +325,9 @@ else if(e.getSource()==this.buttonBestätigen)
         {this.Spieleauswahl();}
 
 else if(e.getSource()==this.buttonAbmelden)
+        {this.AnmeldenAufbauen();}
+        
+else if(e.getSource()==this.buttonPÜ)
         {this.AnmeldenAufbauen();}
 
 }}
