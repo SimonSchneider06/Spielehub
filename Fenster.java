@@ -29,6 +29,8 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
     private JButton buttonBestätigen;
     private JButton buttonAbbrechen;
     private JButton buttonAbmelden;
+    
+    private Thread gameLoop;
    
     /**
      * Konstruktor für Objekte der Klasse Spielfeld
@@ -164,7 +166,8 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         super.add(buttonSp1);
         super.add(buttonAbmelden);
 
-
+        //------------------------gameloop--------------------
+        gameLoop = new Thread(new GameLoop(dino));
         
        // SpielfeldAufbauen();
         AnmeldenAufbauen();
@@ -229,6 +232,15 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
      void DinoSpielGruppeSichtbar(boolean sichtbar){
          dino.gibBild().setVisible(sichtbar);
          labelPunkte.setVisible(sichtbar);
+         if(sichtbar){
+             try{
+                TimeUnit.SECONDS.sleep(2);
+                gameLoop.start();
+                }
+            catch(Exception e){
+                System.out.println(e);
+                }
+            }
         }
         
     void AnmeldeGruppeSichtbar(boolean sichtbar){

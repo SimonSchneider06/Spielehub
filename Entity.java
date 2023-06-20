@@ -63,7 +63,7 @@ public class Entity
             img_number = 1;
         }
         // setBild mit nächstem Bild
-        bild.setIcon(new ImageIcon(bild_ordner_pfad + img_number + ".png"));
+        //bild.setIcon(new ImageIcon(bild_ordner_pfad + img_number + ".png"));
     }
     JLabel gibBild(){
         return bild;
