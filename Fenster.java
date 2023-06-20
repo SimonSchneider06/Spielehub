@@ -187,24 +187,10 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
      */
     public void SpielfeldAufbauen(){
         // sichtbar
-        labelPunkte.setVisible(true);
-        dino.gibBild().setVisible(true);
-        
-        //unsichtbar
-        bn.setVisible(false);
-        pw.setVisible(false);
-        buttonAnmelden.setVisible(false);
-        labelSA.setVisible(false);
-        buttonSp1.setVisible(false);
-        labelAnmelden.setVisible(false);
-        
-        RErfolg.setVisible(false);
-        buttonBestätigen.setVisible(false);
-        
-        bnÜberprüfen.setVisible(false);
-        pwÜberprüfen.setVisible(false);
-        buttonAbbrechen.setVisible(false);
-        buttonAbmelden.setVisible(false);
+        DinoSpielGruppeSichtbar(true);
+        AnmeldeGruppeSichtbar(false);
+        RegistrierGruppeSichtbar(false);
+        SpielauswahlGruppeSichtbar(false);
 
     }
     /**
@@ -212,43 +198,20 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
      */
     public void AnmeldenAufbauen(){
         // Anmelden sichtbar
-        labelAnmelden.setVisible(true);
-        bn.setVisible(true);
-        pw.setVisible(true);
-        buttonAnmelden.setVisible(true);
-        buttonRegistrieren.setVisible(true);
-        labelPunkte.setVisible(false);
-        labelSA.setVisible(false);
-       buttonSp1.setVisible(false);
-       dino.gibBild().setVisible(false);
-       RErfolg.setVisible(false);
-        buttonBestätigen.setVisible(false);
-        bnÜberprüfen.setVisible(false);
-        pwÜberprüfen.setVisible(false);
-        buttonAbbrechen.setVisible(false);
-        buttonAbmelden.setVisible(false);
+        DinoSpielGruppeSichtbar(false);
+        AnmeldeGruppeSichtbar(true);
+        RegistrierGruppeSichtbar(false);
+        SpielauswahlGruppeSichtbar(false);
     }
     /**
      * Zeigt die Spielauswahl
      */
     public void Spieleauswahl(){
         // Spieleauswahl sichtbar
-       labelSA.setVisible(true);
-        buttonAbmelden.setVisible(true);
-       
-       buttonSp1.setVisible(true);
-       labelAnmelden.setVisible(false);
-        bn.setVisible(false);
-        pw.setVisible(false);
-        buttonAnmelden.setVisible(false);
-        buttonRegistrieren.setVisible(false);
-        labelPunkte.setVisible(false);
-        dino.gibBild().setVisible(false);
-        RErfolg.setVisible(false);
-        buttonBestätigen.setVisible(false);
-        bnÜberprüfen.setVisible(false);
-        pwÜberprüfen.setVisible(false);
-        buttonAbbrechen.setVisible(false);
+       DinoSpielGruppeSichtbar(false);
+        AnmeldeGruppeSichtbar(false);
+        RegistrierGruppeSichtbar(false);
+        SpielauswahlGruppeSichtbar(true);
         
     }
         public void Registrieren(){
