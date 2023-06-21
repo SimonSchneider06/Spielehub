@@ -7,21 +7,21 @@ import java.util.concurrent.TimeUnit;
  */
 public class GameLoop implements Runnable
 {
-    Dino dino;   
+    private Dino dino;   
     boolean gameOver;
     /**
      * Konstruktor für Objekte der Klasse GameLoop
      */
     public GameLoop(Dino dino)
     {
-        dino = dino;
+        this.dino = dino;
         gameOver = false;
     }
     
     public void run(){
         //dino.Update();
         while(!gameOver){
-        dino.Update();
+        this.dino.Update();
         //System.out.println("--START--");
         try
         {
