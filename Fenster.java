@@ -82,7 +82,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         buttonAnmelden = new JButton();
         buttonAnmelden.setText("Anmelden");
         buttonAnmelden.setLocation(320, 520);
-        buttonAnmelden.setSize (470, 60);
+        buttonAnmelden.setSize (470, 70);
         buttonAnmelden.setEnabled(true);
         buttonAnmelden.setFont(buttonAnmelden.getFont().deriveFont(56f));
         buttonAnmelden.addActionListener(this);
@@ -90,7 +90,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         buttonRegistrieren = new JButton();
         buttonRegistrieren.setText("Registrieren");
         buttonRegistrieren.setLocation(320,440);
-        buttonRegistrieren.setSize (470, 60);
+        buttonRegistrieren.setSize (470, 70);
         buttonRegistrieren.setEnabled(true);
         buttonRegistrieren.setFont(buttonRegistrieren.getFont().deriveFont(56f));
         buttonRegistrieren.addActionListener(this);
@@ -110,7 +110,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         buttonBestätigen = new JButton();
         buttonBestätigen.setText("Bestätigen");
         buttonBestätigen.setLocation(320, 440);
-        buttonBestätigen.setSize (470, 60);
+        buttonBestätigen.setSize (470, 70);
         buttonBestätigen.setEnabled(true);
         buttonBestätigen.setFont(buttonBestätigen.getFont().deriveFont(56f));
         buttonBestätigen.addActionListener(this);
@@ -118,7 +118,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         buttonAbbrechen = new JButton();
         buttonAbbrechen.setText("Abbrechen");
         buttonAbbrechen.setLocation(320, 520);
-        buttonAbbrechen.setSize (470, 60);
+        buttonAbbrechen.setSize (470, 70);
         buttonAbbrechen.setEnabled(true);
         buttonAbbrechen.setFont(buttonBestätigen.getFont().deriveFont(56f));
         buttonAbbrechen.addActionListener(this);
