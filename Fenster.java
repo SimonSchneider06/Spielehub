@@ -29,7 +29,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
     private JButton buttonSp1;
     private JButton buttonBestätigen;
     private JButton buttonAbbrechen;
-    private JButton buttonAbmelden;
+    private JButton buttonAbmelden; 
 
     private JButton buttonPÜ;
 
@@ -187,6 +187,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         labelPÜ.setSize(300,50);
         labelPÜ.setFont(labelPÜ.getFont().deriveFont(46f));
         
+        super.add(labelPÜ);
         //------------------------gameloop--------------------
         gameLoop = new Thread(new GameLoop(dino));
 
@@ -219,6 +220,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         AnmeldeGruppeSichtbar(false);
         RegistrierGruppeSichtbar(false);
         SpielauswahlGruppeSichtbar(false);
+        PunkteübersichtGruppeSichtbar(false); 
 
     }
     /**
@@ -230,6 +232,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         AnmeldeGruppeSichtbar(true);
         RegistrierGruppeSichtbar(false);
         SpielauswahlGruppeSichtbar(false);
+        PunkteübersichtGruppeSichtbar(false); 
     }
     /**
      * Zeigt die Spielauswahl
@@ -240,6 +243,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         AnmeldeGruppeSichtbar(false);
         RegistrierGruppeSichtbar(false);
         SpielauswahlGruppeSichtbar(true);
+        PunkteübersichtGruppeSichtbar(false); 
         
     }
         public void Registrieren(){
@@ -249,8 +253,17 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         AnmeldeGruppeSichtbar(false);
         RegistrierGruppeSichtbar(true);
         SpielauswahlGruppeSichtbar(false);
+        PunkteübersichtGruppeSichtbar(false); 
 
         
+     }
+     public void Punkteübersicht(){
+        DinoSpielGruppeSichtbar(false);
+        AnmeldeGruppeSichtbar(false);
+        RegistrierGruppeSichtbar(false);
+        SpielauswahlGruppeSichtbar(false);
+        PunkteübersichtGruppeSichtbar(true); 
+        buttonAbmelden.setVisible(true);
      }
      
      void DinoSpielGruppeSichtbar(boolean sichtbar){
@@ -293,6 +306,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
     }
 
     void PunkteübersichtGruppeSichtbar(boolean sichtbar){
+        labelPÜ.setVisible(sichtbar);
         
     
     }
@@ -346,6 +360,7 @@ else if(e.getSource()==this.buttonAbmelden)
         {this.AnmeldenAufbauen();}
         
 else if(e.getSource()==this.buttonPÜ)
-        {this.AnmeldenAufbauen();}
+        {this.Punkteübersicht();}
+        
 
 }}
