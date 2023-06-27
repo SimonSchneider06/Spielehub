@@ -11,6 +11,7 @@ class DATENBANKVERBINDUNG
 {
     /** Speichert die Verbindung zur Datenbank. */
     private Connection conn;
+    private String Benutzername;
 
     /**
      * Im Konstruktor wird eine Verbindung zur Datenbank aufgebaut.
@@ -69,6 +70,25 @@ class DATENBANKVERBINDUNG
         {
             Statement st = conn. createStatement (); 
             st. executeUpdate ("INSERT INTO personen (ID, Vorname, Nachname,Passwort, Status, Benutzername, GerichtMo, GerichtDi, GerichtMi, GerichtDo, GerichtFr) VALUES ('1', 'Max', 'Muster','pass212','M', 'DoSc', '1','1', '0', '1','0')");
+            //st. executeUpdate ("DELETE FROM personen WHERE Nachname = 'Reschauer'");
+            
+            
+           // st. executeUpdate (anweisung);
+            st. close ();
+
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+    void AbrufPasswort( String Benutzername )
+    //void AnweisungAbsetzen(String anweisung)
+    {
+        System.out.println("Passwortabfrage");
+        try
+        {
+            Statement st = conn. createStatement (); 
+            st. executeUpdate ("SELECT FROM personen WHERE Benutzername = ' Benutzername'(Benutzername, Passwort )");
             //st. executeUpdate ("DELETE FROM personen WHERE Nachname = 'Reschauer'");
             
             
@@ -154,23 +174,5 @@ class DATENBANKVERBINDUNG
             e.printStackTrace();
         }
     }
-    void PasswortAbfragen()
-    //void AnweisungAbsetzen(String anweisung)
-    {
-        System.out.println("Eingefuegt Anfang");
-        try
-        {
-            Statement st = conn. createStatement (); 
-            st. executeUpdate ("INSERT INTO personen (ID, Vorname, Nachname,Passwort, Status, Benutzername, GerichtMo, GerichtDi, GerichtMi, GerichtDo, GerichtFr) VALUES ('1', 'Max', 'Muster','pass212','M', 'DoSc', '1','1', '0', '1','0')");
-            //st. executeUpdate ("DELETE FROM personen WHERE Nachname = 'Reschauer'");
-            
-            
-           // st. executeUpdate (anweisung);
-            st. close ();
-
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-}}
+   }
 
