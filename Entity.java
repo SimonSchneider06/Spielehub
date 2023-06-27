@@ -10,13 +10,13 @@ import javax.swing.*;
 public class Entity
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
-    private int pos_x;
-    private int pos_y;
+    public int pos_x;
+    public int pos_y;
 
-    private int size_x;
-    private int size_y;
+    public int size_x;
+    public int size_y;
     
-    private int speed;
+    public int speed;
     
     public JLabel bild;
     String bild_ordner_pfad;
@@ -42,12 +42,13 @@ public class Entity
         bild.setIcon(new ImageIcon(bild_ordner_pfad + img_number + ".png"));
         bild.setLocation(pos_x,pos_y);
         bild.setSize(size_x, size_y);
+        bild.setFocusable(true);
     }
 
     /**
      *  Bewegt die Entitäten nach links(Kakteen,...)
      */
-    protected void Move_left()
+    public void Move_left()
     {
         pos_x -= speed;
     }
@@ -55,7 +56,7 @@ public class Entity
      *  Animiert die Entitäten
      *  Wechselt zwischen Ihren Bildern
      */
-    protected void Animate(){
+    public void Animate(){
         if(img_number == 1){
             img_number += 1;
         }
