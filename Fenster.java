@@ -35,7 +35,9 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
 
     
     private Thread gameLoop;
-   
+    private String Benutzername;
+    private String Passwort;
+    
     /**
      * Konstruktor für Objekte der Klasse Spielfeld
      */
@@ -125,13 +127,13 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
 
         
         bnÜberprüfen = new JLabel();
-        bnÜberprüfen.setText("Benutzername");
+        bnÜberprüfen.setText(Benutzername);
         bnÜberprüfen.setLocation(280,250);
         bnÜberprüfen.setSize (550,80);
         bnÜberprüfen.setFont(pw.getFont().deriveFont(56f));
         
         pwÜberprüfen = new JLabel();
-        pwÜberprüfen.setText("Passwort");
+        pwÜberprüfen.setText(Passwort);
         pwÜberprüfen.setLocation(280,330);
         pwÜberprüfen.setSize (550,80);
         pwÜberprüfen.setFont(pw.getFont().deriveFont(56f));
@@ -202,7 +204,8 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
         buttonAbbrechen.addActionListener(this);
         buttonAbmelden.addActionListener(this);
         buttonPÜ.addActionListener(this);
-
+        pw.addMouseListener(this);
+        bn.addMouseListener(this);
 
 
         // Fenster konfigurieren
@@ -329,6 +332,10 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
     public void mouseExited(MouseEvent e) {}
 
     public void mouseClicked(MouseEvent e) {
+        if(e.getSource() == pw)
+            pw.setText("");
+    else if(e.getSource() == bn)
+            bn.setText("");
     }
     
     /**
@@ -342,6 +349,10 @@ public class Fenster extends JFrame implements ActionListener,MouseListener
     else if(e.getSource()==this.buttonRegistrieren)
     {
         this.Registrieren();
+        Benutzername = bn.getText();
+        Passwort = pw.getText();
+        pwÜberprüfen.setText(Passwort);
+        bnÜberprüfen.setText(Benutzername);
         
 }
 
@@ -361,6 +372,7 @@ else if(e.getSource()==this.buttonAbmelden)
         
 else if(e.getSource()==this.buttonPÜ)
         {this.Punkteübersicht();}
-        
 
-}}
+
+}
+}
