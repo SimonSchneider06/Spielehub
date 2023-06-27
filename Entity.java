@@ -10,18 +10,21 @@ import javax.swing.*;
 public class Entity
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
-    private int pos_x;
-    private int pos_y;
+    public int pos_x;
+    public int pos_y;
 
-    private int size_x;
-    private int size_y;
+    public int size_x;
+    public int size_y;
     
-    private int speed;
+    public int speed;
     
     public JLabel bild;
     String bild_ordner_pfad;
     String img_pfad;
     int img_number; 
+    
+    ImageIcon icon1;
+    ImageIcon icon2;
 
     /**
      * Konstruktor für Objekte der Klasse Entity
@@ -38,16 +41,20 @@ public class Entity
         img_number = 1;
         //bild = setBild(bild_ordner_pfad + "1.png", pos_x, pos_y);
         //bild = setBild(pos_x, pos_y);
+        icon1 = new ImageIcon(bild_ordner_pfad + "1.png");
+        icon2 = new ImageIcon(bild_ordner_pfad + "2.png");
+        
         bild = new JLabel();
-        bild.setIcon(new ImageIcon(bild_ordner_pfad + img_number + ".png"));
+        bild.setIcon(icon1);
         bild.setLocation(pos_x,pos_y);
         bild.setSize(size_x, size_y);
+        bild.setFocusable(true);
     }
 
     /**
      *  Bewegt die Entitäten nach links(Kakteen,...)
      */
-    protected void Move_left()
+    public void Move_left()
     {
         pos_x -= speed;
     }
@@ -55,13 +62,16 @@ public class Entity
      *  Animiert die Entitäten
      *  Wechselt zwischen Ihren Bildern
      */
-    protected void Animate(){
+    public void Animate(){
         if(img_number == 1){
             img_number += 1;
+            bild.setIcon(icon1);
         }
-        else{
+        else if(img_number == 2){
             img_number = 1;
+            bild.setIcon(icon2);
         }
+        
         // setBild mit nächstem Bild
         //bild.setIcon(new ImageIcon(bild_ordner_pfad + img_number + ".png"));
     }
