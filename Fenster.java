@@ -330,7 +330,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener,KeyL
 
     @Override public void keyPressed(KeyEvent e){
 
-        if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+        if(e.getKeyCode() == KeyEvent.VK_SPACE){
 
             JLabel dinoBild = dino.gibBild();
             dinoBild.setLocation(dinoBild.getLocation().x, dinoBild.getLocation().y - 200);

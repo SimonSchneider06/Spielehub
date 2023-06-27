@@ -22,6 +22,9 @@ public class Entity
     String bild_ordner_pfad;
     String img_pfad;
     int img_number; 
+    
+    ImageIcon icon1;
+    ImageIcon icon2;
 
     /**
      * Konstruktor für Objekte der Klasse Entity
@@ -38,8 +41,11 @@ public class Entity
         img_number = 1;
         //bild = setBild(bild_ordner_pfad + "1.png", pos_x, pos_y);
         //bild = setBild(pos_x, pos_y);
+        icon1 = new ImageIcon(bild_ordner_pfad + "1.png");
+        icon2 = new ImageIcon(bild_ordner_pfad + "2.png");
+        
         bild = new JLabel();
-        bild.setIcon(new ImageIcon(bild_ordner_pfad + img_number + ".png"));
+        bild.setIcon(icon1);
         bild.setLocation(pos_x,pos_y);
         bild.setSize(size_x, size_y);
         bild.setFocusable(true);
@@ -59,10 +65,13 @@ public class Entity
     public void Animate(){
         if(img_number == 1){
             img_number += 1;
+            bild.setIcon(icon1);
         }
-        else{
+        else if(img_number == 2){
             img_number = 1;
+            bild.setIcon(icon2);
         }
+        
         // setBild mit nächstem Bild
         //bild.setIcon(new ImageIcon(bild_ordner_pfad + img_number + ".png"));
     }
