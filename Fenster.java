@@ -30,7 +30,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener,KeyL
     private JButton buttonBestätigen;
     private JButton buttonAbbrechen;
     private JButton buttonAbmelden; 
-
+    private JButton buttonZurück;
     private JButton buttonPÜ;
 
     private Thread gameLoop;
@@ -160,7 +160,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener,KeyL
 
         buttonPÜ = new JButton();
         buttonPÜ.setText("Punkteübersicht");
-        buttonPÜ.setLocation(50, 650);
+        buttonPÜ.setLocation(20, 650);
         buttonPÜ.setSize (600, 60);
         buttonPÜ.setEnabled(true);
         buttonPÜ.setFont(buttonPÜ.getFont().deriveFont(56f));
@@ -186,7 +186,16 @@ public class Fenster extends JFrame implements ActionListener,MouseListener,KeyL
         labelPÜ.setLocation(50,150);
         labelPÜ.setSize(300,50);
         labelPÜ.setFont(labelPÜ.getFont().deriveFont(46f));
-
+        
+        buttonZurück = new JButton();
+        buttonZurück.setText("Zurück");
+        buttonZurück.setLocation(20, 650);
+        buttonZurück.setSize (470, 60);
+        buttonZurück.setEnabled(true);
+        buttonZurück.setFont(buttonSp1.getFont().deriveFont(56f));
+        buttonZurück.addActionListener(this);
+        
+        super.add(buttonZurück);
         super.add(labelPÜ);
         //------------------------gameloop--------------------
         gameLoop = new Thread(new GameLoop(dino));
@@ -201,7 +210,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener,KeyL
         buttonAbbrechen.addActionListener(this);
         buttonAbmelden.addActionListener(this);
         buttonPÜ.addActionListener(this);
-
+        buttonZurück.addActionListener(this);
         pw.addMouseListener(this);
         bn.addMouseListener(this);
 
@@ -269,6 +278,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener,KeyL
         SpielauswahlGruppeSichtbar(false);
         PunkteübersichtGruppeSichtbar(true); 
         buttonAbmelden.setVisible(true);
+        
     }
 
     void DinoSpielGruppeSichtbar(boolean sichtbar){
@@ -312,6 +322,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener,KeyL
 
     void PunkteübersichtGruppeSichtbar(boolean sichtbar){
         labelPÜ.setVisible(sichtbar);
+        buttonZurück.setVisible(sichtbar);
 
     }
 
@@ -371,11 +382,11 @@ public class Fenster extends JFrame implements ActionListener,MouseListener,KeyL
         pwÜberprüfen.setText(Passwort);
         bnÜberprüfen.setText(Benutzername);
         
-}
+    }
 
 
         
-        else if(e.getSource()==this.buttonRegistrieren)
+    else if(e.getSource()==this.buttonRegistrieren)
         {
             this.Registrieren();
 
@@ -396,8 +407,11 @@ public class Fenster extends JFrame implements ActionListener,MouseListener,KeyL
         {this.AnmeldenAufbauen();}
 
         
-else if(e.getSource()==this.buttonPÜ)
+        else if(e.getSource()==this.buttonPÜ)
         {this.Punkteübersicht();}
+        
+        else if(e.getSource()==this.buttonZurück)
+        {this.Spieleauswahl();}
     
 
 }
