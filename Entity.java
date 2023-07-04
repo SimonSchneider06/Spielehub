@@ -76,6 +76,25 @@ public class Entity
         // setBild mit nächstem Bild
         //bild.setIcon(new ImageIcon(bild_ordner_pfad + img_number + ".png"));
     }
+    
+    /**
+     * Gravity up to a certain point, the ground
+     * :param: ground = the y- Koordinate, wo die Entity stehen bleibt
+     * */
+    public void Gravity(int ground){
+    
+        // only apply if not at ground level
+        if( bild.getLocation().y < ground){
+            // gravity
+            bild.setLocation(bild.getLocation().x,bild.getLocation().y + 10);
+        }
+        else{
+            // no gravity
+            // set pos_y to ground,for the case, that it goes
+            // below the ground level
+            this.pos_y = ground;
+        }
+    }
     JLabel gibBild(){
         return bild;
     }

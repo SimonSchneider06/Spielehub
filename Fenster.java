@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  * @author Simon Schneider + Maximilian Edenhofer 
  * @version 1.0
  */
-public class Fenster extends JFrame implements ActionListener,MouseListener,KeyListener
+public class Fenster extends JFrame implements ActionListener,MouseListener, KeyListener
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     private JLabel labelPunkte;
@@ -326,14 +326,6 @@ public class Fenster extends JFrame implements ActionListener,MouseListener,KeyL
 
     }
 
-    /*
-    Game Loop
-     */
-    public static void gameLoop(){
-        int fps = 30;
-
-    }
-
     public void mousePressed(MouseEvent e) {}
 
     public void mouseReleased(MouseEvent e) {}
@@ -355,9 +347,17 @@ public class Fenster extends JFrame implements ActionListener,MouseListener,KeyL
     @Override public void keyPressed(KeyEvent e){
 
         if(e.getKeyCode() == KeyEvent.VK_SPACE){
+            
+            if(dino.jump){
+                JLabel dinoBild = dino.gibBild();
+                for(int i = 0; i <= 200; i++){
+                dinoBild.setLocation(dinoBild.getLocation().x, dinoBild.getLocation().y - 1);
+                }
+                dino.jump = false;
+            }
 
-            JLabel dinoBild = dino.gibBild();
-            dinoBild.setLocation(dinoBild.getLocation().x, dinoBild.getLocation().y - 200);
+            
+
         }
         repaint();
     }

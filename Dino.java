@@ -10,7 +10,7 @@ import java.awt.event.*;
 public class Dino extends Entity
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
-
+    boolean jump;
     /**
      * Konstruktor für Objekte der Klasse Dino
      */
@@ -18,8 +18,11 @@ public class Dino extends Entity
     {
         // Instanzvariable initialisieren
         super("Bilder/Dino/",200,600,100,100);
+        this.jump = true;
     }
+    
     @Override public void Update(){
         Animate();
+        Gravity(600);
     }
 }
