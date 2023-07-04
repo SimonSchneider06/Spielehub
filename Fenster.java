@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.net.*;
 import java.util.concurrent.TimeUnit;
-
+import java.util.Random;
 /**
  * Beschreiben Sie hier die Klasse Spielfeld.
  * 
@@ -35,7 +35,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     private JButton buttonPÜ;
     private JButton buttonEV;
     
-    private Thread gameLoop;
+    private Thread gameLoopThread;
     private String Benutzername;
     private String Passwort;
     private int LetztesSpielDinorun;
@@ -45,6 +45,9 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     
     public int ground;
     
+    Random rand;
+    
+    GameLoop gameLoop;
 
     /**
      * Konstruktor für Objekte der Klasse Spielfeld
@@ -66,6 +69,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         ground = 400;
 
         dino = new Dino(ground);
+        
         dino.gibBild().addKeyListener(this);
         // labelPunkte, dinoBild hinzufügen
         super.add(labelPunkte);
@@ -233,7 +237,8 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         super.add(buttonZurück);
         super.add(labelPÜ);
         //------------------------gameloop--------------------
-        gameLoop = new Thread(new GameLoop(dino));
+        gameLoop = new GameLoop(dino);
+        gameLoopThread = new Thread(gameLoop);
 
         // SpielfeldAufbauen();
         AnmeldenAufbauen();
@@ -337,7 +342,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         if(sichtbar){
             try{
                 TimeUnit.SECONDS.sleep(2);
-                gameLoop.start();
+                gameLoopThread.start();
             }
             catch(Exception e){
                 System.out.println(e);
@@ -383,6 +388,18 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
 
     }
 
+    /**
+       Spawn Kaktus und füge ihn zur enemyList hinzu
+       
+       */
+    public void spawnEnemy(){
+        int pos_x = 1200 + rand.nextInt(300);
+        Kaktus enemy = new Kaktus(pos_x,ground);
+        // add JLabel of enemy
+        super.add(enemy.gibBild());
+        gameLoop.addEnemyToList(enemy);
+    }
+    
     public void mousePressed(MouseEvent e) {}
 
     public void mouseReleased(MouseEvent e) {}

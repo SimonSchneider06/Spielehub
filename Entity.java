@@ -51,8 +51,7 @@ public class Entity
      */
     public void Move_left()
     {
-        pos_x -= speed;
-        bild.setLocation(pos_x,bild.getLocation().y);
+        bild.setLocation(bild.getLocation().x -= this.speed,bild.getLocation().y);
     }
     /**
      *  Animiert die Entitäten
