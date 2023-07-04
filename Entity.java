@@ -9,14 +9,9 @@ import javax.swing.*;
  */
 public class Entity
 {
-    // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
-    public int pos_x;
-    public int pos_y;
-
-    public int size_x;
-    public int size_y;
-    
+    // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen    
     public int speed;
+    public int pos_x;
     
     public JLabel bild;
     String bild_ordner_pfad;
@@ -25,6 +20,8 @@ public class Entity
     
     ImageIcon icon1;
     ImageIcon icon2;
+    
+    public boolean allowAnimate;
 
     /**
      * Konstruktor für Objekte der Klasse Entity
@@ -34,15 +31,13 @@ public class Entity
         // Instanzvariable initialisieren
         // dinoBild
         bild_ordner_pfad = bild_ordner_pfad;
-        size_x = size_x;
-        size_y = size_y;
-        pos_x = pos_x;
-        pos_y = pos_y;
         img_number = 1;
         //bild = setBild(bild_ordner_pfad + "1.png", pos_x, pos_y);
         //bild = setBild(pos_x, pos_y);
         icon1 = new ImageIcon(bild_ordner_pfad + "1.png");
         icon2 = new ImageIcon(bild_ordner_pfad + "2.png");
+        
+        this.allowAnimate = true;
         
         bild = new JLabel();
         bild.setIcon(icon1);
@@ -64,13 +59,15 @@ public class Entity
      *  Wechselt zwischen Ihren Bildern
      */
     public void Animate(){
-        if(img_number == 1){
-            img_number += 1;
-            bild.setIcon(icon1);
-        }
-        else if(img_number == 2){
-            img_number = 1;
-            bild.setIcon(icon2);
+        if(this.allowAnimate){
+                if(img_number == 1){
+                img_number += 1;
+                bild.setIcon(icon1);
+            }
+            else if(img_number == 2){
+                img_number = 1;
+                bild.setIcon(icon2);
+            }
         }
         
         // setBild mit nächstem Bild
@@ -87,6 +84,7 @@ public class Entity
         if( bild.getLocation().y < ground){
             // gravity
             //System.out.println("G");
+            this.allowAnimate = false;
             bild.setLocation(bild.getLocation().x,bild.getLocation().y + 20);
         }
         else{
@@ -94,6 +92,7 @@ public class Entity
             // set pos_y to ground,for the case, that it goes
             // below the ground level
             //System.out.println("NO");
+            this.allowAnimate = true;
             bild.setLocation(bild.getLocation().x,ground);
         }
     }

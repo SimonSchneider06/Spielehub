@@ -63,7 +63,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         labelPunkte.setFont(labelPunkte.getFont().deriveFont(46f));
         
         // ground
-        ground = 600;
+        ground = 400;
 
         dino = new Dino(ground);
         dino.gibBild().addKeyListener(this);
@@ -406,17 +406,12 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         if(e.getKeyCode() == KeyEvent.VK_SPACE){
             JLabel dinoBild = dino.gibBild();
             if(dino.jump){
+                dinoBild.setLocation(dinoBild.getLocation().x,dinoBild.getLocation().y - 200);
                 
-                for(int i = 0; i <= 200; i++){
-                dinoBild.setLocation(dinoBild.getLocation().x, dinoBild.getLocation().y - 1);
-                }
                 dino.jump = false;
-                dino.jumpTimer.StartTimer();
+                dino.jumpTimer.activate();
+                //dino.jumpTimer.StartTimer();
             }
-            else{
-                dino.jump = dino.jumpTimer.Update();
-            }
-            
 
         }
         repaint();
@@ -430,11 +425,11 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
      */
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==this.buttonAnmelden ){
-        if (datenManager.PasswortAbfragen() ==Passwort){
+        //if (datenManager.PasswortAbfragen() ==Passwort){
 
         this.Spieleauswahl();
-        }
-        else { this.Anmeldenfehlgeschlagen();}
+        //}
+        //else { this.Anmeldenfehlgeschlagen();}
     }
     else if(e.getSource()==this.buttonRegistrieren)
     {

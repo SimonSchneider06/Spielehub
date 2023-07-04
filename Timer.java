@@ -1,4 +1,5 @@
 
+
 /**
  * Beschreiben Sie hier die Klasse Timer.
  * 
@@ -11,7 +12,7 @@ public class Timer
     public long cooldown;
     public long currentTime;
     public long startTime;
-
+    public boolean active;
     /**
      * Konstruktor für Objekte der Klasse Timer
      * @param cooldown in Milliseconds
@@ -19,42 +20,44 @@ public class Timer
     public Timer(long cooldown)
     {
         // Instanzvariable initialisieren
-        cooldown = cooldown;
+        this.cooldown = cooldown;
+        this.active = false;
     }
 
     /**
-     * Starts/Resets the Timer
+     * Activate the Timer
      * 
      * */
-    public void StartTimer(){
+    public void activate(){
+        this.active = true;
         this.startTime = System.currentTimeMillis();
     
     }
-    
     /**
-     * Checks if the variable can be changed
-     * Returns true or false
+     * Deactivate the Timer
      * 
      * */
-    public boolean CheckTimer(){
-        if(this.currentTime - this.startTime >= this.cooldown){
-            return true;
-        }
-        else{
-            return false;
-        }
+    public void deactivate(){
+        this.active = false;
+        this.startTime = 0;
+    
     }
+    
     
     /**
      * Update the Timer
-     * 
-     * 
+     *  
      */
     public boolean Update()
     {
         // tragen Sie hier den Code ein
         currentTime = System.currentTimeMillis();
-        return this.CheckTimer();
-        
+        if(this.currentTime - this.startTime >= this.cooldown){
+            if(this.startTime != 0){
+                return true;
+            }
+            this.deactivate();
+        }
+        return false;
     }
 }
