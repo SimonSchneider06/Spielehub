@@ -435,8 +435,8 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
                 dino.isJumping = true;
                 //dinoBild.setLocation(dinoBild.getLocation().x,dinoBild.getLocation().y - 200);
                 
-                dino.canjump = false;
-                dino.jumpTimer.activate();
+                
+                //dino.jumpTimer.activate();
                 //dino.jumpTimer.StartTimer();
             }
 

@@ -1,1 +1,5 @@
+<<<<<<< HEAD
   ; Simon123 1234 0 0 ; 
+=======
+  ; Simon123 1234 0  ; Simon123 1234 0  ; Edenhoferm12 01001 0 0 ;; Edenhoferm12 01001 0 0 ;; 123 123 0 0 ; 123 123 0 0 ; 12 12 0 0; 12 12 0 0; Benutzername Passwort 0 0; Benutzername Passwort 0 0; Benutzername Passwort 0 0; Benutzername Passwort 0 0; Benutzername Passwort 0 0; Benutzername Passwort 0 0; Benutzername Passwort 0 0; Benutzername Passwort 0 0
+>>>>>>> 22e9bee2b3e0ed1a7d449466a2074b82181af30b
