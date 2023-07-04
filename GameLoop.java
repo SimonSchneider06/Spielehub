@@ -21,16 +21,16 @@ public class GameLoop implements Runnable
     public void run(){
         //dino.Update();
         while(!gameOver){
-        this.dino.Update();
-        //System.out.println("--START--");
-        try
-        {
-            TimeUnit.MILLISECONDS.sleep(50);
+            this.dino.Update();
+            //System.out.println("--START--");
+            try
+            {
+                TimeUnit.MILLISECONDS.sleep(50);
+            }
+            catch (InterruptedException ie)
+            {
+                ie.printStackTrace();
+            }
         }
-        catch (InterruptedException ie)
-        {
-            ie.printStackTrace();
-        }
-    }
     }
     }

@@ -79,20 +79,22 @@ public class Entity
     
     /**
      * Gravity up to a certain point, the ground
-     * :param: ground = the y- Koordinate, wo die Entity stehen bleibt
+     * @param ground = the y- Koordinate, wo die Entity stehen bleibt
      * */
     public void Gravity(int ground){
-    
+        //System.out.println(bild.getLocation().y);
         // only apply if not at ground level
         if( bild.getLocation().y < ground){
             // gravity
-            bild.setLocation(bild.getLocation().x,bild.getLocation().y + 10);
+            //System.out.println("G");
+            bild.setLocation(bild.getLocation().x,bild.getLocation().y + 20);
         }
         else{
             // no gravity
             // set pos_y to ground,for the case, that it goes
             // below the ground level
-            this.pos_y = ground;
+            //System.out.println("NO");
+            bild.setLocation(bild.getLocation().x,ground);
         }
     }
     JLabel gibBild(){

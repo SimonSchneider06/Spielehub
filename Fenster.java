@@ -39,6 +39,8 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     
     private Daten datenManager;
     
+    public int ground;
+    
 
     /**
      * Konstruktor für Objekte der Klasse Spielfeld
@@ -55,8 +57,11 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         labelPunkte.setLocation(20,20);
         labelPunkte.setSize(200,50);
         labelPunkte.setFont(labelPunkte.getFont().deriveFont(46f));
+        
+        // ground
+        ground = 600;
 
-        dino = new Dino();
+        dino = new Dino(ground);
         dino.gibBild().addKeyListener(this);
         // labelPunkte, dinoBild hinzufügen
         super.add(labelPunkte);
@@ -352,15 +357,18 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     @Override public void keyPressed(KeyEvent e){
 
         if(e.getKeyCode() == KeyEvent.VK_SPACE){
-            
+            JLabel dinoBild = dino.gibBild();
             if(dino.jump){
-                JLabel dinoBild = dino.gibBild();
+                
                 for(int i = 0; i <= 200; i++){
                 dinoBild.setLocation(dinoBild.getLocation().x, dinoBild.getLocation().y - 1);
                 }
                 dino.jump = false;
+                dino.jumpTimer.StartTimer();
             }
-
+            else{
+                dino.jump = dino.jumpTimer.Update();
+            }
             
 
         }
