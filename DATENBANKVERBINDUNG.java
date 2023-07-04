@@ -24,7 +24,7 @@ class DATENBANKVERBINDUNG
         // Protokoll (jdbc:mysql): Der JDBC-Treiber für MySQL wird verwendet
         // Rechner/Pfad (IP-Adresse/Datenbankname): Der Sever läuft auf dem Rechner IP-Adresse, die DB heißt Datenbankname
         // Parameter: Geben Benutzer Schueler und Passwort GymBeiln an.
-        VerbindungOeffnen("jdbc:mysql://172.16.0.99/Testdatenbank?user=Schueler&password=GymBeiln");
+        VerbindungOeffnen("jdbc:mysql://172.16.0.99/testdatenbank?user=Schueler&password=GymBeiln");
     }
 
     /**
@@ -69,7 +69,7 @@ class DATENBANKVERBINDUNG
         try
         {
             Statement st = conn. createStatement (); 
-            st. executeUpdate ("INSERT INTO personen (ID, Vorname, Nachname,Passwort, Status, Benutzername, GerichtMo, GerichtDi, GerichtMi, GerichtDo, GerichtFr) VALUES ('1', 'Max', 'Muster','pass212','M', 'DoSc', '1','1', '0', '1','0')");
+            st. executeUpdate ("INSERT INTO datenbankspielehub (ID, Vorname, Nachname,Passwort, Status, Benutzername, GerichtMo, GerichtDi, GerichtMi, GerichtDo, GerichtFr) VALUES ('1', 'Max', 'Muster','pass212','M', 'DoSc', '1','1', '0', '1','0')");
             //st. executeUpdate ("DELETE FROM personen WHERE Nachname = 'Reschauer'");
             
             
