@@ -48,8 +48,9 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     Random rand;
     
     GameLoop gameLoop;
-    
     public boolean gameOver;
+    
+    public int Punkte;
 
     /**
      * Konstruktor für Objekte der Klasse Spielfeld
@@ -64,10 +65,11 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         this.gameOver = false;
         //---------------------Spielfeld------------------------
         // Punkte label
+        this.Punkte = 0;
         labelPunkte = new JLabel();
-        labelPunkte.setText("Punkte: ");
+        labelPunkte.setText("Punkte: " + Punkte);
         labelPunkte.setLocation(20,20);
-        labelPunkte.setSize(200,50);
+        labelPunkte.setSize(300,50);
         labelPunkte.setFont(labelPunkte.getFont().deriveFont(46f));
         
         // ground
@@ -401,12 +403,22 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
        */
     public void spawnEnemy(){
         int pos_x = 1200 + rand.nextInt(300);
-        Kaktus enemy = new Kaktus(pos_x,ground);
+        Kaktus enemy = new Kaktus(pos_x,ground,gameLoop.kaktusSpeed);
         // add JLabel of enemy
         JLabel enemyBild =  enemy.gibBild();
         enemyBild.setVisible(true);
         super.add(enemyBild);
         gameLoop.addEnemyToList(enemy);
+    }
+    
+    
+    /**
+     * Punkte erhöhen bei gewissen Wert und Anzeige updaten
+     * @parma increment = um wie viel die Punkte erhöht werden sollen 
+       */
+    public void erhöhePunkte(int increment){
+        this.Punkte += increment;
+        labelPunkte.setText("Punkte: " + this.Punkte);
     }
     
     public void mousePressed(MouseEvent e) {}
@@ -433,11 +445,6 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
             JLabel dinoBild = dino.gibBild();
             if(dino.canjump){
                 dino.isJumping = true;
-                //dinoBild.setLocation(dinoBild.getLocation().x,dinoBild.getLocation().y - 200);
-                
-                
-                //dino.jumpTimer.activate();
-                //dino.jumpTimer.StartTimer();
             }
 
         }

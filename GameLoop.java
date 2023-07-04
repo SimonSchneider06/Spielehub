@@ -20,8 +20,9 @@ public class GameLoop implements Runnable
     boolean gameOver;
     
     Random rand;
-    
     Fenster fenster;
+    
+    int kaktusSpeed;
     /**
      * Konstruktor für Objekte der Klasse GameLoop
      */
@@ -30,6 +31,8 @@ public class GameLoop implements Runnable
         this.dino = dino;
         this.ground = ground;
         this.fenster = fenster;
+        
+        this.kaktusSpeed = 15;
         
         gameOver = false;
         rand = new Random();
@@ -42,13 +45,6 @@ public class GameLoop implements Runnable
     }
     
     
-    public Entity spawnKaktus(){
-        int pos_x = 1200 + rand.nextInt(300);
-        Entity k = new Kaktus(pos_x,this.ground);
-        this.addEnemyToList(k);
-        
-        return k;
-    }
     /**
        Delete an Enemy and remove it from the list, if it gets of the screen
        @param e = Enemy
@@ -69,24 +65,8 @@ public class GameLoop implements Runnable
     public void updateEnemys(){
         for(int i = 0; i < this.enemyList.size(); i ++){
             Entity enemy = this.enemyList.get(i);
-            this.checkCollision(enemy);
             this.deleteEnemy(i,enemy);
             enemy.Update();
-        }
-    }
-    
-    /**
-       Checks the collision between an Enemy and the Dino
-       @param enemy = Enemy to check the collision
-       
-       */
-    public void checkCollision(Entity enemy){
-        JLabel dinoBild = this.dino.gibBild();
-        JLabel enemyBild = enemy.gibBild();
-        if(enemyBild.getLocation().x == dino.pos_x){
-            
-            System.out.println("Collision");
-            
         }
     }
     
@@ -103,7 +83,8 @@ public class GameLoop implements Runnable
                 this.fenster.spawnEnemy();
             }
             if(loopCount % 100 == 0){
-                Kaktus.increaseSpeed(2);
+                this.fenster.erhöhePunkte(1);
+                this.kaktusSpeed += 3;
             }
             
             //System.out.println("--START--");

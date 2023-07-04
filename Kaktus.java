@@ -9,17 +9,17 @@ public class Kaktus extends Entity
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     int ground;
-    static int speed;
+    int speed;
     
     /**
      * Konstruktor für Objekte der Klasse Kaktus
      */
-    public Kaktus(int pos_x,int ground)
+    public Kaktus(int pos_x,int ground,int speed)
     {
         // Instanzvariable initialisieren
         super("Bilder-Transparent/Kaktus/",pos_x,ground,100,100);
         this.ground = ground;
-        this.speed = 15;
+        this.speed = speed;
     }
     /**
      *  Bewegt die Kakteen nach links(Kakteen,...)
@@ -29,7 +29,7 @@ public class Kaktus extends Entity
         this.bild.setLocation(this.bild.getLocation().x - this.speed,this.bild.getLocation().y);
     }
     
-    public static void increaseSpeed(int increment){
+    public void increaseSpeed(int increment){
         speed += increment;
     }
 

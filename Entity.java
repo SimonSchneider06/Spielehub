@@ -1,5 +1,6 @@
 import java.net.*;
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Beschreiben Sie hier die Klasse Entity.
@@ -13,6 +14,8 @@ public class Entity
     public int speed;
     public int pos_x;
     public int pos_y;
+    public int size_x;
+    public int size_y;
     
     public JLabel bild;
     String bild_ordner_pfad;
@@ -23,6 +26,8 @@ public class Entity
     ImageIcon icon2;
     
     public boolean allowAnimate;
+    
+    Rectangle rectangle;
 
     /**
      * Konstruktor für Objekte der Klasse Entity
@@ -38,8 +43,10 @@ public class Entity
         icon1 = new ImageIcon(bild_ordner_pfad + "1.png");
         icon2 = new ImageIcon(bild_ordner_pfad + "2.png");
         
-        pos_x = pos_x;
-        pos_y = pos_y;
+        this.pos_x = pos_x;
+        this.pos_y = pos_y;
+        this.size_x = size_x;
+        this.size_y = size_y;
         
         this.allowAnimate = true;
         
@@ -68,6 +75,7 @@ public class Entity
         // setBild mit nächstem Bild
         //bild.setIcon(new ImageIcon(bild_ordner_pfad + img_number + ".png"));
     }
+    
     JLabel gibBild(){
         return bild;
     }
