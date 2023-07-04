@@ -61,7 +61,7 @@ public class GameLoop implements Runnable
     public void updateEnemys(){
         for(int i = 0; i < this.enemyList.size(); i ++){
             Entity e = this.enemyList.get(i);
-            //this.deleteEnemy(i,e);
+            this.deleteEnemy(i,e);
             e.Update();
         }
     }

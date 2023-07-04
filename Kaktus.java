@@ -18,9 +18,17 @@ public class Kaktus extends Entity
         // Instanzvariable initialisieren
         super("Bilder-Transparent/Kaktus/",pos_x,ground,100,100);
         this.ground = ground;
+        this.speed = 15;
+    }
+    /**
+     *  Bewegt die Kakteen nach links(Kakteen,...)
+     */
+    public void Move_left()
+    {
+        this.bild.setLocation(this.bild.getLocation().x - this.speed,this.bild.getLocation().y);
     }
 
-    @Override public void Animate(){
-        System.out.println("Animate");
+    @Override public void Update(){
+        this.Move_left();
     }
 }

@@ -45,14 +45,6 @@ public class Entity
         bild.setSize(size_x, size_y);
         bild.setFocusable(true);
     }
-
-    /**
-     *  Bewegt die Entitäten nach links(Kakteen,...)
-     */
-    public void Move_left()
-    {
-        this.bild.setLocation(this.bild.getLocation().x - this.speed,this.bild.getLocation().y);
-    }
     /**
      *  Animiert die Entitäten
      *  Wechselt zwischen Ihren Bildern
@@ -99,7 +91,6 @@ public class Entity
         return bild;
     }
     public void Update(){
-        Move_left();
         Animate();
     }
 }

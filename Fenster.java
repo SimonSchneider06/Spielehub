@@ -48,6 +48,8 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     Random rand;
     
     GameLoop gameLoop;
+    
+    public boolean gameOver;
 
     /**
      * Konstruktor für Objekte der Klasse Spielfeld
@@ -59,6 +61,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         
         //random 
         this.rand = new Random();
+        this.gameOver = false;
         //---------------------Spielfeld------------------------
         // Punkte label
         labelPunkte = new JLabel();
