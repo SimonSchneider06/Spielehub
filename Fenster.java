@@ -320,6 +320,8 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         SpielauswahlGruppeSichtbar(false);
         PunkteübersichtGruppeSichtbar(false); 
         AnmeldungFGruppeSichtbar(false);
+        bnÜberprüfen.setVisible(true);
+        pwÜberprüfen.setVisible(true);
 
     }
 
@@ -340,6 +342,8 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         SpielauswahlGruppeSichtbar(false);
         PunkteübersichtGruppeSichtbar(false);
         AnmeldungFGruppeSichtbar(true);
+        bnÜberprüfen.setVisible(true);
+        pwÜberprüfen.setVisible(true);
         
     }
 
@@ -363,16 +367,16 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         labelAnmelden.setVisible(sichtbar);
         bn.setVisible(sichtbar);
         pw.setVisible(sichtbar);
-        buttonAnmelden.setVisible(sichtbar);
         buttonRegistrieren.setVisible(sichtbar);
+        buttonAnmelden.setVisible(sichtbar);
+        
     }
 
     void RegistrierGruppeSichtbar(boolean sichtbar){
         RErfolg.setVisible(sichtbar);
         buttonBestätigen.setVisible(sichtbar);
         buttonAbbrechen.setVisible(sichtbar);
-        bnÜberprüfen.setVisible(sichtbar);
-        pwÜberprüfen.setVisible(sichtbar);
+        
 
     }
       void AnmeldungFGruppeSichtbar(boolean sichtbar){
@@ -380,6 +384,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         buttonEV.setVisible(sichtbar);
         bnÜberprüfen.setVisible(sichtbar);
         pwÜberprüfen.setVisible(sichtbar);
+        
 
     }
 
@@ -459,11 +464,11 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
      */
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==this.buttonAnmelden ){
-        if (Integer.toString(datenManager.PasswortAbfragen(Benutzername)) == Passwort){
+         if (Integer.toString(datenManager.PasswortAbfragen(Benutzername)) == Passwort){
 
         this.Spieleauswahl();
-        }
-        else { this.Anmeldenfehlgeschlagen();}
+         }
+         else { this.Anmeldenfehlgeschlagen();}
     }
     else if(e.getSource()==this.buttonRegistrieren)
     {
