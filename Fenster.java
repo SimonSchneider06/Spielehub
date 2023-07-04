@@ -24,6 +24,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     private JLabel labelPÜ;
     private JLabel labelSA;
     private JLabel RErfolg;
+    private JLabel AnmeldenF;
     private JButton buttonAnmelden;
     private JButton buttonRegistrieren;
     private JButton buttonSp1;
@@ -32,10 +33,13 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     private JButton buttonAbmelden; 
     private JButton buttonZurück;
     private JButton buttonPÜ;
-
+    private JButton buttonEV;
+    
     private Thread gameLoop;
     private String Benutzername;
     private String Passwort;
+    private int LetztesSpielDinorun;
+    private int HighscoreDinorun;
     
     private Daten datenManager;
     
@@ -147,7 +151,28 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         super.add(bnÜberprüfen);
         super.add(pwÜberprüfen);
         super.add(buttonAbbrechen);
-        //---------------------Spieleauswahl(SA)------------------------
+             //---------------------Anmeldungfehlgeschlagen------------------------
+        AnmeldenF = new JLabel();
+        AnmeldenF.setText("Die Anmeldung ist fehlgeschlagen!");
+        AnmeldenF.setLocation(250,40);
+        AnmeldenF.setSize (900, 200);       
+        AnmeldenF.setFont(RErfolg.getFont().deriveFont(46f));
+
+        buttonEV = new JButton();
+        buttonEV.setText("Erneut versuchen");
+        buttonEV.setLocation(320, 440);
+        buttonEV.setSize (550, 70);
+        buttonEV.setEnabled(true);
+        buttonEV.setFont(buttonBestätigen.getFont().deriveFont(56f));
+        buttonEV.addActionListener(this);
+
+        
+
+       
+
+        super.add(buttonEV);
+        super.add(AnmeldenF);
+               //---------------------Spieleauswahl(SA)------------------------
 
         labelSA = new JLabel();
         labelSA.setText("Spieleauswahl: ");
@@ -216,6 +241,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         buttonAbmelden.addActionListener(this);
         buttonPÜ.addActionListener(this);
         buttonZurück.addActionListener(this);
+        buttonEV.addActionListener(this);
         pw.addMouseListener(this);
         bn.addMouseListener(this);
 
@@ -237,6 +263,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         RegistrierGruppeSichtbar(false);
         SpielauswahlGruppeSichtbar(false);
         PunkteübersichtGruppeSichtbar(false); 
+        AnmeldungFGruppeSichtbar(false);
 
     }
 
@@ -250,6 +277,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         RegistrierGruppeSichtbar(false);
         SpielauswahlGruppeSichtbar(false);
         PunkteübersichtGruppeSichtbar(false); 
+        AnmeldungFGruppeSichtbar(false);
     }
 
     /**
@@ -262,6 +290,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         RegistrierGruppeSichtbar(false);
         SpielauswahlGruppeSichtbar(true);
         PunkteübersichtGruppeSichtbar(false); 
+        AnmeldungFGruppeSichtbar(false);
 
     }
 
@@ -273,6 +302,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         RegistrierGruppeSichtbar(true);
         SpielauswahlGruppeSichtbar(false);
         PunkteübersichtGruppeSichtbar(false); 
+        AnmeldungFGruppeSichtbar(false);
 
     }
 
@@ -283,6 +313,16 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         SpielauswahlGruppeSichtbar(false);
         PunkteübersichtGruppeSichtbar(true); 
         buttonAbmelden.setVisible(true);
+        AnmeldungFGruppeSichtbar(false);
+        
+    }
+    public void Anmeldenfehlgeschlagen(){
+        DinoSpielGruppeSichtbar(false);
+        AnmeldeGruppeSichtbar(false);
+        RegistrierGruppeSichtbar(false);
+        SpielauswahlGruppeSichtbar(false);
+        PunkteübersichtGruppeSichtbar(false);
+        AnmeldungFGruppeSichtbar(true);
         
     }
 
@@ -312,6 +352,13 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         RErfolg.setVisible(sichtbar);
         buttonBestätigen.setVisible(sichtbar);
         buttonAbbrechen.setVisible(sichtbar);
+        bnÜberprüfen.setVisible(sichtbar);
+        pwÜberprüfen.setVisible(sichtbar);
+
+    }
+      void AnmeldungFGruppeSichtbar(boolean sichtbar){
+        AnmeldenF.setVisible(sichtbar);
+        buttonEV.setVisible(sichtbar);
         bnÜberprüfen.setVisible(sichtbar);
         pwÜberprüfen.setVisible(sichtbar);
 
@@ -374,10 +421,12 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
      * Registriert button presses, ect
      */
     public void actionPerformed(ActionEvent e){
-        if(e.getSource()==this.buttonAnmelden){
+        if(e.getSource()==this.buttonAnmelden ){
+        if (datenManager.PasswortAbfragen() ==Passwort){
 
         this.Spieleauswahl();
-        
+        }
+        else { this.Anmeldenfehlgeschlagen();}
     }
     else if(e.getSource()==this.buttonRegistrieren)
     {
@@ -390,13 +439,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     }
 
 
-        
-    else if(e.getSource()==this.buttonRegistrieren)
-        {
-            this.Registrieren();
-            datenManager.DatensatzEinfuegen("");
-
-        }
+    
 
         else if(e.getSource() == this.buttonSp1){
             this.SpielfeldAufbauen();
@@ -407,7 +450,9 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         }
         else if(e.getSource()==this.buttonBestätigen)
 
-        {this.Spieleauswahl();}
+        {this.Spieleauswahl();
+        datenManager.DatensatzEinfuegen( Benutzername+" "+Passwort+ " "+LetztesSpielDinorun+" "+HighscoreDinorun+ " " );
+        }
 
         else if(e.getSource()==this.buttonAbmelden)
         {this.AnmeldenAufbauen();}
@@ -418,6 +463,8 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         
         else if(e.getSource()==this.buttonZurück)
         {this.Spieleauswahl();}
+         else if(e.getSource()==this.buttonEV)
+        {this.AnmeldenAufbauen();}
     
 
 }

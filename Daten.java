@@ -38,7 +38,7 @@ public class Daten {
         }
     }
 
-    public boolean NameEnthalten(String vorname) {
+    public boolean BenutzernameEnthalten(String Benutzername) {
         try {
             java.io.BufferedReader FileReader=                      //ein Reader um die Datei Zeilenweise auszulesen
                 new java.io.BufferedReader(
@@ -53,7 +53,7 @@ public class Daten {
                 String[] split=text.split(";");                //Die Datensätze werden mit Strichpunkt getrennt
                 for (String word : split) {
                     String[] zeile = word.split(" ");  //Die einzelnen Wörter eines Datensatzes mit Leerzeichen
-                    if(zeile[0].equals(vorname)){return true;}
+                    if(zeile[0].equals(Benutzername)){return true;}
                     // System.out.println("Benutzername: " + zeile[0] + "   Passwort " + zeile[1]+ "   LetztesSpielDinorun:  " +zeile[2]+ "    HighscoreDinorun: " + zeile[3]);
                 }
 
@@ -67,7 +67,7 @@ public class Daten {
     }
 
     
-    public int AlterVon(String vorname){
+    public int PasswortAbfragen(String Benutzername){
         try {
             java.io.BufferedReader FileReader=                      //ein Reader um die Datei Zeilenweise auszulesen
                 new java.io.BufferedReader(
@@ -82,7 +82,7 @@ public class Daten {
                 String[] split=text.split(";");                //Die Datensätze werden mit Strichpunkt getrennt
                 for (String word : split) {
                     String[] zeile = word.split(" "); //Die einzelnen Wörter eines Datensatzes mit Leerzeichen
-                    if(zeile[0].equals(vorname)){return  Integer.parseInt(zeile[2]);}
+                    if(zeile[0].equals(Benutzername)){return  Integer.parseInt(zeile[2]);}
                     // System.out.println("Benutzername: " + zeile[0] + "   Passwort " + zeile[1]+ "   LetztesSpielDinorun:  " +zeile[2]+ "    HighscoreDinorun: " + zeile[3]);
                 }
 
