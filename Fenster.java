@@ -450,11 +450,11 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
      */
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==this.buttonAnmelden ){
-        //if (datenManager.PasswortAbfragen() ==Passwort){
+        if (datenManager.PasswortAbfragen(Benutzername) == Passwort){
 
         this.Spieleauswahl();
-        //}
-        //else { this.Anmeldenfehlgeschlagen();}
+        }
+        else { this.Anmeldenfehlgeschlagen();}
     }
     else if(e.getSource()==this.buttonRegistrieren)
     {
@@ -479,7 +479,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         else if(e.getSource()==this.buttonBestätigen)
 
         {this.Spieleauswahl();
-        datenManager.DatensatzEinfuegen( Benutzername+" "+Passwort+ " "+LetztesSpielDinorun+" "+HighscoreDinorun+ " " );
+        datenManager.DatensatzEinfuegen( Benutzername+" "+Passwort+ " "+LetztesSpielDinorun+" "+HighscoreDinorun );
         }
 
         else if(e.getSource()==this.buttonAbmelden)
