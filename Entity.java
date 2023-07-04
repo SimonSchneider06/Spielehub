@@ -12,6 +12,7 @@ public class Entity
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen    
     public int speed;
     public int pos_x;
+    public int pos_y;
     
     public JLabel bild;
     String bild_ordner_pfad;
@@ -36,6 +37,9 @@ public class Entity
         //bild = setBild(pos_x, pos_y);
         icon1 = new ImageIcon(bild_ordner_pfad + "1.png");
         icon2 = new ImageIcon(bild_ordner_pfad + "2.png");
+        
+        pos_x = pos_x;
+        pos_y = pos_y;
         
         this.allowAnimate = true;
         
@@ -63,29 +67,6 @@ public class Entity
         
         // setBild mit nächstem Bild
         //bild.setIcon(new ImageIcon(bild_ordner_pfad + img_number + ".png"));
-    }
-    
-    /**
-     * Gravity up to a certain point, the ground
-     * @param ground = the y- Koordinate, wo die Entity stehen bleibt
-     * */
-    public void Gravity(int ground){
-        //System.out.println(bild.getLocation().y);
-        // only apply if not at ground level
-        if( bild.getLocation().y < ground){
-            // gravity
-            //System.out.println("G");
-            this.allowAnimate = false;
-            bild.setLocation(bild.getLocation().x,bild.getLocation().y + 20);
-        }
-        else{
-            // no gravity
-            // set pos_y to ground,for the case, that it goes
-            // below the ground level
-            //System.out.println("NO");
-            this.allowAnimate = true;
-            bild.setLocation(bild.getLocation().x,ground);
-        }
     }
     JLabel gibBild(){
         return bild;

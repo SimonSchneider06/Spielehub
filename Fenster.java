@@ -348,6 +348,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
             try{
                 TimeUnit.SECONDS.sleep(2);
                 gameLoopThread.start();
+                
                 this.spawnEnemy();
             }
             catch(Exception e){
@@ -430,10 +431,11 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
 
         if(e.getKeyCode() == KeyEvent.VK_SPACE){
             JLabel dinoBild = dino.gibBild();
-            if(dino.jump){
-                dinoBild.setLocation(dinoBild.getLocation().x,dinoBild.getLocation().y - 200);
+            if(dino.canjump){
+                dino.isJumping = true;
+                //dinoBild.setLocation(dinoBild.getLocation().x,dinoBild.getLocation().y - 200);
                 
-                dino.jump = false;
+                dino.canjump = false;
                 dino.jumpTimer.activate();
                 //dino.jumpTimer.StartTimer();
             }
