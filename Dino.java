@@ -53,6 +53,10 @@ public class Dino extends Entity
         }   
     }
     
+    public void checkCollision(){
+        
+    }
+    
     @Override public void Update(){
         Animate();
         this.Jump();
