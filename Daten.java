@@ -28,7 +28,7 @@ public class Daten {
                 String[] split=text.split(";");                //hier wird die Zeile zerlegt als Trennzeichen ; 
                 for (String word : split) {
                     String[] zeile = word.split(" ");
-                    System.out.println("Benutzername: " + zeile[0] + "   Passwort " + zeile[1]+ "   LetztesSpielDinorun:  " +zeile[2]+ "    HighscoreDinorun: " + zeile[3]);
+                    System.out.println("Benutzername: " + zeile[0] + "   Passwort: " + zeile[1]+ "   LetztesSpielDinorun:  " +zeile[2]+ "    HighscoreDinorun: " + zeile[3]);
                 }
 
             }
@@ -83,7 +83,7 @@ public class Daten {
                 for (String word : split) {
                     String[] zeile = word.split(" "); //Die einzelnen Wörter eines Datensatzes mit Leerzeichen
                     if(zeile[0].equals(Benutzername)){return  Integer.parseInt(zeile[2]);}
-                    // System.out.println("Benutzername: " + zeile[0] + "   Passwort " + zeile[1]+ "   LetztesSpielDinorun:  " +zeile[2]+ "    HighscoreDinorun: " + zeile[3]);
+                    // System.out.println("Benutzername: " + zeile[0] + "   Passwort: " + zeile[1]+ "   LetztesSpielDinorun:  " +zeile[2]+ "    HighscoreDinorun: " + zeile[3]);
                 }
 
             }
