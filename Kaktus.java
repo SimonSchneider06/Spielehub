@@ -16,7 +16,7 @@ public class Kaktus extends Entity
     public Kaktus(int pos_x,int ground)
     {
         // Instanzvariable initialisieren
-        super("Bilder-Transparent",pos_x,ground,100,100);
+        super("Bilder-Transparent/Kaktus/",pos_x,ground,100,100);
         this.ground = ground;
     }
 

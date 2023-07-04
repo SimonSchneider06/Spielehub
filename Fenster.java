@@ -57,6 +57,8 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         // Datenmanager
         datenManager = new Daten();
         
+        //random 
+        this.rand = new Random();
         //---------------------Spielfeld------------------------
         // Punkte label
         labelPunkte = new JLabel();
@@ -69,8 +71,8 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         ground = 400;
 
         dino = new Dino(ground);
-        
         dino.gibBild().addKeyListener(this);
+        
         // labelPunkte, dinoBild hinzufügen
         super.add(labelPunkte);
         super.add(dino.gibBild());
@@ -237,7 +239,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         super.add(buttonZurück);
         super.add(labelPÜ);
         //------------------------gameloop--------------------
-        gameLoop = new GameLoop(dino);
+        gameLoop = new GameLoop(dino,this);
         gameLoopThread = new Thread(gameLoop);
 
         // SpielfeldAufbauen();
@@ -397,7 +399,9 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         int pos_x = 1200 + rand.nextInt(300);
         Kaktus enemy = new Kaktus(pos_x,ground);
         // add JLabel of enemy
-        super.add(enemy.gibBild());
+        JLabel enemyBild =  enemy.gibBild();
+        enemyBild.setVisible(true);
+        super.add(enemyBild);
         gameLoop.addEnemyToList(enemy);
     }
     

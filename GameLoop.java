@@ -20,13 +20,16 @@ public class GameLoop implements Runnable
     boolean gameOver;
     
     Random rand;
+    
+    Fenster fenster;
     /**
      * Konstruktor für Objekte der Klasse GameLoop
      */
-    public GameLoop(Dino dino)
+    public GameLoop(Dino dino,Fenster fenster)
     {
         this.dino = dino;
         this.ground = ground;
+        this.fenster = fenster;
         
         gameOver = false;
         rand = new Random();
@@ -58,7 +61,7 @@ public class GameLoop implements Runnable
     public void updateEnemys(){
         for(int i = 0; i < this.enemyList.size(); i ++){
             Entity e = this.enemyList.get(i);
-            this.deleteEnemy(i,e);
+            //this.deleteEnemy(i,e);
             e.Update();
         }
     }
