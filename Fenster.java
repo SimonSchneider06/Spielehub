@@ -37,12 +37,17 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     private String Benutzername;
     private String Passwort;
     
+    private Daten datenManager;
+    
 
     /**
      * Konstruktor für Objekte der Klasse Spielfeld
      */
     public Fenster()
     {
+        // Datenmanager
+        datenManager = new Daten();
+        
         //---------------------Spielfeld------------------------
         // Punkte label
         labelPunkte = new JLabel();
@@ -389,6 +394,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     else if(e.getSource()==this.buttonRegistrieren)
         {
             this.Registrieren();
+            datenManager.DatensatzEinfuegen("");
 
         }
 
