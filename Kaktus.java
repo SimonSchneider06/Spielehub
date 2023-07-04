@@ -9,7 +9,8 @@ public class Kaktus extends Entity
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     int ground;
-
+    static int speed;
+    
     /**
      * Konstruktor für Objekte der Klasse Kaktus
      */
@@ -26,6 +27,10 @@ public class Kaktus extends Entity
     public void Move_left()
     {
         this.bild.setLocation(this.bild.getLocation().x - this.speed,this.bild.getLocation().y);
+    }
+    
+    public static void increaseSpeed(int increment){
+        speed += increment;
     }
 
     @Override public void Update(){
