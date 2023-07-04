@@ -15,7 +15,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener,KeyL
     private JLabel labelPunkte;
 
     private Dino dino;
-
+    
     private JLabel labelAnmelden;
     private JTextField bn;
     private JTextField pw;

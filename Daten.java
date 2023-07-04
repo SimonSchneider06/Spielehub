@@ -28,7 +28,7 @@ public class Daten {
                 String[] split=text.split(";");                //hier wird die Zeile zerlegt als Trennzeichen ; 
                 for (String word : split) {
                     String[] zeile = word.split(" ");
-                    System.out.println("Vorname: " + zeile[0] + "   Nachname: " + zeile[1]+ "   Alter: " +zeile[2]+ "    Punkte: " + zeile[3]);
+                    System.out.println("Benutzername: " + zeile[0] + "   Passwort " + zeile[1]+ "   LetztesSpielDinorun:  " +zeile[2]+ "    HighscoreDinorun: " + zeile[3]);
                 }
 
             }
@@ -54,7 +54,7 @@ public class Daten {
                 for (String word : split) {
                     String[] zeile = word.split(" ");  //Die einzelnen Wörter eines Datensatzes mit Leerzeichen
                     if(zeile[0].equals(vorname)){return true;}
-                    //System.out.println("Vorname: " + zeile[0] + "   Nachname: " + zeile[1]+ "   Alter: " +zeile[2]+ "    Punkte: " + zeile[3]);
+                    // System.out.println("Benutzername: " + zeile[0] + "   Passwort " + zeile[1]+ "   LetztesSpielDinorun:  " +zeile[2]+ "    HighscoreDinorun: " + zeile[3]);
                 }
 
             }
@@ -83,7 +83,7 @@ public class Daten {
                 for (String word : split) {
                     String[] zeile = word.split(" "); //Die einzelnen Wörter eines Datensatzes mit Leerzeichen
                     if(zeile[0].equals(vorname)){return  Integer.parseInt(zeile[2]);}
-                    //System.out.println("Vorname: " + zeile[0] + "   Nachname: " + zeile[1]+ "   Alter: " +zeile[2]+ "    Punkte: " + zeile[3]);
+                    // System.out.println("Benutzername: " + zeile[0] + "   Passwort " + zeile[1]+ "   LetztesSpielDinorun:  " +zeile[2]+ "    HighscoreDinorun: " + zeile[3]);
                 }
 
             }
@@ -104,7 +104,7 @@ public class Daten {
     public void DatensatzEinfuegen(String daten){
         
         // Beispiel für "daten" im Format Vorname Nachname Alter Punkte
-        //String daten = "Nils Einhorn 11 1000" + inhalt;
+        //String daten = "SchneiderS 1234 150 260;
 
         String inhalt="";
              try {
@@ -118,7 +118,7 @@ public class Daten {
             String text="";
 
             while(null!=(text=FileReader.readLine())){         //lesen jeder Zeile  
-                inhalt = inhalt + text;
+                 inhalt = inhalt+ text;
             }
 
         } catch (Exception e) {
