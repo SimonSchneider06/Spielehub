@@ -82,7 +82,7 @@ public class Daten {
                 String[] split=text.split(";");                //Die Datensätze werden mit Strichpunkt getrennt
                 for (String word : split) {
                     String[] zeile = word.split(" "); //Die einzelnen Wörter eines Datensatzes mit Leerzeichen
-                    if(zeile[0].equals(Benutzername)){return  Integer.parseInt(zeile[2]);}
+                    if(zeile[0].equals(Benutzername)){return  Integer.parseInt(zeile[1]);}
                     // System.out.println("Benutzername: " + zeile[0] + "   Passwort: " + zeile[1]+ "   LetztesSpielDinorun:  " +zeile[2]+ "    HighscoreDinorun: " + zeile[3]);
                 }
 

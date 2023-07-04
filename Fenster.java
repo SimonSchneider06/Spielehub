@@ -345,6 +345,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         bnÜberprüfen.setVisible(true);
         pwÜberprüfen.setVisible(true);
         
+        
     }
 
     void DinoSpielGruppeSichtbar(boolean sichtbar){
@@ -376,14 +377,15 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         RErfolg.setVisible(sichtbar);
         buttonBestätigen.setVisible(sichtbar);
         buttonAbbrechen.setVisible(sichtbar);
+        bnÜberprüfen.setVisible(sichtbar);
+        pwÜberprüfen.setVisible(sichtbar);
         
 
     }
       void AnmeldungFGruppeSichtbar(boolean sichtbar){
         AnmeldenF.setVisible(sichtbar);
         buttonEV.setVisible(sichtbar);
-        bnÜberprüfen.setVisible(sichtbar);
-        pwÜberprüfen.setVisible(sichtbar);
+        
         
 
     }
@@ -463,13 +465,22 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
      * Registriert button presses, ect
      */
     public void actionPerformed(ActionEvent e){
-        if(e.getSource()==this.buttonAnmelden ){
-         if (Integer.toString(datenManager.PasswortAbfragen(Benutzername)) == Passwort){
+        if(e.getSource()==this.buttonAnmelden && datenManager.PasswortAbfragen(Benutzername) == Integer.parseInt(Passwort)){
+         
 
-        this.Spieleauswahl();
-         }
-         else { this.Anmeldenfehlgeschlagen();}
-    }
+         this.Spieleauswahl();
+           }
+        else if(e.getSource()==this.buttonAnmelden && !(datenManager.PasswortAbfragen(Benutzername) == Integer.parseInt(Passwort)))
+         
+
+        
+         { 
+        Benutzername = bn.getText();
+        Passwort = pw.getText();
+        pwÜberprüfen.setText(Passwort);
+        bnÜberprüfen.setText(Benutzername);
+             this.Anmeldenfehlgeschlagen();}
+        
     else if(e.getSource()==this.buttonRegistrieren)
     {
         this.Registrieren();
