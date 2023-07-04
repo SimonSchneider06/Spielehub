@@ -464,9 +464,9 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
      */
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==this.buttonAnmelden ){
-         if (Integer.toString(datenManager.PasswortAbfragen(Benutzername)) == Passwort){
+         if (String.valueOf(datenManager.PasswortAbfragen(Benutzername)) == Passwort){
 
-        this.Spieleauswahl();
+            this.Spieleauswahl();
          }
          else { this.Anmeldenfehlgeschlagen();}
     }
