@@ -343,6 +343,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
             try{
                 TimeUnit.SECONDS.sleep(2);
                 gameLoopThread.start();
+                this.spawnEnemy();
             }
             catch(Exception e){
                 System.out.println(e);

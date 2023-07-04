@@ -52,6 +52,7 @@ public class Entity
     public void Move_left()
     {
         bild.setLocation(bild.getLocation().x -= this.speed,bild.getLocation().y);
+        System.out.println("Moving Left");
     }
     /**
      *  Animiert die Entitäten
@@ -101,5 +102,6 @@ public class Entity
     public void Update(){
         Move_left();
         Animate();
+        System.out.println("Entity Update");
     }
 }
