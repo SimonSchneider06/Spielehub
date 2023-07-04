@@ -48,6 +48,7 @@ public class Dino extends Entity
                 this.isJumping = false;
                 this.canjump = true;
                 this.currentJumpStrength = this.jumpStrength;
+                this.bild.setLocation(this.bild.getLocation().x,this.ground);
             }
         }   
     }

@@ -102,6 +102,9 @@ public class GameLoop implements Runnable
             if(loopCount % 30 == 0){
                 this.fenster.spawnEnemy();
             }
+            if(loopCount % 100 == 0){
+                Kaktus.increaseSpeed(2);
+            }
             
             //System.out.println("--START--");
             try
