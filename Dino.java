@@ -18,8 +18,6 @@ public class Dino extends Entity
     int currentJumpStrength;
     
     int ground;
-    public Timer jumpTimer;
-    public int cooldown;
     /**
      * Konstruktor für Objekte der Klasse Dino
      */
@@ -37,14 +35,6 @@ public class Dino extends Entity
         this.currentJumpStrength = 50;
         this.jumpStrength = 50;
         
-        this.cooldown = 800;
-        jumpTimer = new Timer(cooldown);
-    }
-    
-    public void CheckTimer(){
-        if(this.jumpTimer.active && !this.canjump){
-            this.canjump = this.jumpTimer.Update();
-        }
     }
     
     
@@ -64,8 +54,6 @@ public class Dino extends Entity
     
     @Override public void Update(){
         Animate();
-        //this.Gravity(this.ground);
-        //this.CheckTimer();
         this.Jump();
         //System.out.println(System.currentTimeMillis());
     }
