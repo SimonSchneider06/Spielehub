@@ -603,9 +603,9 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
 
     else if(e.getSource()==this.buttonRegistrieren)
     {
+        this.Benutzername = bn.getText();
         if(!datenManager.BenutzernameEnthalten(this.Benutzername)){
             this.Registrieren();
-            Benutzername = bn.getText();
             Passwort = pw.getText();
             pwÜberprüfen.setText(Passwort);
             bnÜberprüfen.setText(Benutzername);

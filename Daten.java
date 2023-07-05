@@ -71,6 +71,7 @@ public class Daten {
      * Woerter mit Leerzeichen getrennt.
      * Parameterwert z.B. "Benutzername, Passwort, letzte Punkte, Highscore"
      * Voraussetzung: Die Datei "TestdatenStrichpunkt" ist im Projektordner und enthält bereits Datensätze
+     * @param: daten: String in obiger Reihenfolge
      */
     public void DatensatzEinfuegen(String daten){
         
@@ -97,7 +98,7 @@ public class Daten {
             e.printStackTrace();
         }
         // Neuen Datensatz an bereits enthaltene Datensätze anhängen
-        System.out.println(inhalt);
+        System.out.println("PRINT: " + inhalt);
         inhalt = inhalt + daten + ";";
         //System.out.println(inhalt);
         
