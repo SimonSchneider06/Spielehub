@@ -3,6 +3,8 @@ import java.awt.event.*;
 import java.net.*;
 import java.util.concurrent.TimeUnit;
 import java.util.Random;
+import java.util.*;
+
 /**
  * Beschreiben Sie hier die Klasse Spielfeld.
  * 
@@ -19,8 +21,12 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     private JLabel labelAnmelden;
     private JTextField bn;
     private JTextField pw;
+
     private JLabel pwÜberprüfen;
     private JLabel bnÜberprüfen;
+    private JLabel GameOver;
+    private JLabel AnzeigePunkte;
+    private JLabel AnzeigeHighscore;
     private JLabel labelPÜ;
     private JLabel labelSA;
     private JLabel RErfolg;
@@ -32,6 +38,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     private JButton buttonAbbrechen;
     private JButton buttonAbmelden; 
     private JButton buttonZurück;
+    private JButton buttonZurückZurSA;
     private JButton buttonPÜ;
     private JButton buttonEV;
     
@@ -51,6 +58,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     public boolean gameOver;
     
     public int Punkte;
+    public int Highscore;
 
     /**
      * Konstruktor für Objekte der Klasse Spielfeld
@@ -63,6 +71,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         //random 
         this.rand = new Random();
         this.gameOver = false;
+       
         //---------------------Spielfeld------------------------
         // Punkte label
         this.Punkte = 0;
@@ -182,12 +191,10 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         buttonEV.setFont(buttonBestätigen.getFont().deriveFont(56f));
         buttonEV.addActionListener(this);
 
-        
-
-       
 
         super.add(buttonEV);
         super.add(AnmeldenF);
+        
                //---------------------Spieleauswahl(SA)------------------------
 
         labelSA = new JLabel();
@@ -245,7 +252,39 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         super.add(labelPÜ);
         //------------------------gameloop--------------------
         gameLoop = new GameLoop(dino,this);
-        gameLoopThread = new Thread(gameLoop);
+
+             //---------------------Game Over------------------------
+        GameOver = new JLabel();
+        GameOver.setText("Game Over");
+        GameOver.setLocation(250,40);
+        GameOver.setSize (900, 200);       
+        GameOver.setFont(RErfolg.getFont().deriveFont(46f));
+
+        buttonZurückZurSA = new JButton();
+        buttonZurückZurSA.setText("Erneut versuchen");
+        buttonZurückZurSA.setLocation(320, 440);
+        buttonZurückZurSA.setSize (550, 70);
+        buttonZurückZurSA.setEnabled(true);
+        buttonZurückZurSA.setFont(buttonBestätigen.getFont().deriveFont(56f));
+        buttonZurückZurSA.addActionListener(this);
+        
+        
+        AnzeigePunkte = new JLabel();
+        AnzeigePunkte.setText("Punktestand :"+Punkte);
+        AnzeigePunkte.setLocation(280,250);
+       AnzeigePunkte.setSize (550,80);
+        AnzeigePunkte.setFont(pw.getFont().deriveFont(56f));
+
+        AnzeigeHighscore = new JLabel();
+        AnzeigeHighscore.setText("Highscore :" +Highscore);
+        AnzeigeHighscore.setLocation(280,330);
+        AnzeigeHighscore.setSize (550,80);
+        AnzeigeHighscore.setFont(pw.getFont().deriveFont(56f));
+        
+        super.add(buttonZurückZurSA);
+        super.add(GameOver);
+        super.add(AnzeigeHighscore);
+        super.add(AnzeigePunkte);
 
         // SpielfeldAufbauen();
         AnmeldenAufbauen();
@@ -259,6 +298,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         buttonPÜ.addActionListener(this);
         buttonZurück.addActionListener(this);
         buttonEV.addActionListener(this);
+        buttonZurückZurSA.addActionListener(this);
         pw.addMouseListener(this);
         bn.addMouseListener(this);
 
@@ -281,6 +321,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         SpielauswahlGruppeSichtbar(false);
         PunkteübersichtGruppeSichtbar(false); 
         AnmeldungFGruppeSichtbar(false);
+        gameOverGruppeSichtbar(false);
 
     }
 
@@ -295,6 +336,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         SpielauswahlGruppeSichtbar(false);
         PunkteübersichtGruppeSichtbar(false); 
         AnmeldungFGruppeSichtbar(false);
+        gameOverGruppeSichtbar(false);
     }
 
     /**
@@ -308,6 +350,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         SpielauswahlGruppeSichtbar(true);
         PunkteübersichtGruppeSichtbar(false); 
         AnmeldungFGruppeSichtbar(false);
+        gameOverGruppeSichtbar(false);
 
     }
 
@@ -322,6 +365,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         AnmeldungFGruppeSichtbar(false);
         bnÜberprüfen.setVisible(true);
         pwÜberprüfen.setVisible(true);
+        gameOverGruppeSichtbar(false);
 
     }
 
@@ -333,6 +377,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         PunkteübersichtGruppeSichtbar(true); 
         buttonAbmelden.setVisible(true);
         AnmeldungFGruppeSichtbar(false);
+        gameOverGruppeSichtbar(false);
         
     }
     public void Anmeldenfehlgeschlagen(){
@@ -344,8 +389,20 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         AnmeldungFGruppeSichtbar(true);
         bnÜberprüfen.setVisible(true);
         pwÜberprüfen.setVisible(true);
+        gameOverGruppeSichtbar(false);
         
         
+    }
+    public void GameOver(){
+        DinoSpielGruppeSichtbar(false);
+        AnmeldeGruppeSichtbar(false);
+        RegistrierGruppeSichtbar(false);
+        SpielauswahlGruppeSichtbar(false);
+        PunkteübersichtGruppeSichtbar(false); 
+        AnmeldungFGruppeSichtbar(false);
+        gameOverGruppeSichtbar(true);
+        gameLoopThread.stop();
+    
     }
 
     void DinoSpielGruppeSichtbar(boolean sichtbar){
@@ -353,7 +410,9 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         labelPunkte.setVisible(sichtbar);
         if(sichtbar){
             try{
+                gameLoop.gameOver = false;
                 TimeUnit.SECONDS.sleep(2);
+                gameLoopThread = new Thread(gameLoop);
                 gameLoopThread.start();
                 
                 this.spawnEnemy();
@@ -403,6 +462,14 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         buttonZurück.setVisible(sichtbar);
 
     }
+    
+    public void gameOverGruppeSichtbar(boolean sichtbar){
+        buttonZurückZurSA.setVisible(sichtbar);
+        AnzeigePunkte.setVisible(sichtbar);
+        AnzeigeHighscore.setVisible(sichtbar);
+        GameOver.setVisible(sichtbar);
+        
+    }
 
     /**
        Spawn Kaktus und füge ihn zur enemyList hinzu
@@ -412,10 +479,15 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         int pos_x = 1200 + rand.nextInt(300);
         Kaktus enemy = new Kaktus(pos_x,ground,gameLoop.kaktusSpeed);
         // add JLabel of enemy
-        JLabel enemyBild =  enemy.gibBild();
-        enemyBild.setVisible(true);
-        super.add(enemyBild);
+        
+        this.EnemyVisibility(enemy,true);
+        super.add(enemy.gibBild());
         gameLoop.addEnemyToList(enemy);
+    }
+    
+    public void EnemyVisibility(Entity enemy,boolean sichtbar){
+        JLabel bild = enemy.gibBild();
+        bild.setVisible(sichtbar);
     }
     
     
@@ -427,6 +499,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         this.Punkte += increment;
         labelPunkte.setText("Punkte: " + this.Punkte);
     }
+    
     
     public void mousePressed(MouseEvent e) {}
 
@@ -467,23 +540,19 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     public void actionPerformed(ActionEvent e){
 
 
-        if(e.getSource()==this.buttonAnmelden && datenManager.PasswortAbfragen(Benutzername) == Integer.parseInt(Passwort)){
-         
+        if(e.getSource()==this.buttonAnmelden ){
+            this.Benutzername = bn.getText();
+            this.Passwort = pw.getText();
+             if(datenManager.PasswortAbfragen(Benutzername).equals(this.Passwort)){
+                this.Spieleauswahl();
+                }
+             else{
+                pwÜberprüfen.setText(Passwort);
+                bnÜberprüfen.setText(Benutzername);
+                 this.Anmeldenfehlgeschlagen();
+                }   
 
-        
-         this.Spieleauswahl();
-           }
-        else if(e.getSource()==this.buttonAnmelden && !(datenManager.PasswortAbfragen(Benutzername) == Integer.parseInt(Passwort)))
-         
-
-        
-         { 
-        Benutzername = bn.getText();
-        Passwort = pw.getText();
-        pwÜberprüfen.setText(Passwort);
-        bnÜberprüfen.setText(Benutzername);
-             this.Anmeldenfehlgeschlagen();}
-        
+           }        
 
 
     else if(e.getSource()==this.buttonRegistrieren)
@@ -496,7 +565,6 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         
     }
 
-
     
 
         else if(e.getSource() == this.buttonSp1){
@@ -508,8 +576,9 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         }
         else if(e.getSource()==this.buttonBestätigen)
 
-        {this.Spieleauswahl();
+        {
         datenManager.DatensatzEinfuegen( Benutzername+" "+Passwort+ " "+LetztesSpielDinorun+" "+HighscoreDinorun );
+        this.Spieleauswahl();
         }
 
         else if(e.getSource()==this.buttonAbmelden)
@@ -523,6 +592,9 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         {this.Spieleauswahl();}
          else if(e.getSource()==this.buttonEV)
         {this.AnmeldenAufbauen();}
+        else if(e.getSource()==this.buttonZurückZurSA)
+        {this.Spieleauswahl();}
+        
     
 
 }
