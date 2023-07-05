@@ -506,7 +506,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         buttonZurückZurSA.setVisible(sichtbar);
         AnzeigePunkte.setVisible(sichtbar);
         
-        String highScore = datenManager.getHighScore(this.Benutzername);
+        int highScore = datenManager.CheckHighScore(this.Benutzername,this.Punkte);
         AnzeigeHighscore.setText("HighScore: " + highScore);
         AnzeigeHighscore.setVisible(sichtbar);
         

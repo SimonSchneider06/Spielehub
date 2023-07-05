@@ -168,21 +168,40 @@ public class Daten {
         this.DatensatzEinfuegen(neuerDatensatz);
     }
     
-    public void CheckHighScore(String Benutzername, int Punkte){
-        int HighScore = Integer.parseInt(this.getHighScore(Benutzername));
-        if(Punkte > HighScore){
-            this.setHighScore(Benutzername, Punkte);
+    /**
+       Checks if Punkte über HighScore und aktuallisiert die Punkte in der Datenbank;
+       Returns the new HighScore = int;
+       @param Benutzername = String; der Benutzername des zu aktuallisierenden Datensets;
+       @param Punkte = int; Punkte, die dieses Spiel erreicht wurden;
+       */
+    public int CheckHighScore(String Benutzername, int Punkte){
+        try{
+            int HighScore = Integer.parseInt(this.getHighScore(Benutzername));
+            if(Punkte > HighScore){
+                String letztePunkte = this.getLastPoints(Benutzername);
+                this.setPunkteStand(Benutzername, Punkte,letztePunkte);
+                return Punkte;
+            }
+            else{
+                this.setPunkteStand(Benutzername, HighScore, String.valueOf(Punkte));
+                return HighScore;
+            }
         }
-        
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        // don't like it
+        return 0;
     }
     
     /**
-       Setzt den HighScore
+       Aktuallisiert den Punktestand
+       Setzt HighScore und letzte Punkte
        @param Benutzername = String; der Benutzername, wo der HighScore geändert werden soll
        @param newHighScore = int; der neue HighScore;
+       @param letztePunkte = String; letzte Punkte;
        */
-    public void setHighScore(String Benutzername,int newHighScore){
-        int letztePunkte = Integer.parseInt(this.getLastPoints(Benutzername));
+    public void setPunkteStand(String Benutzername,int newHighScore,String letztePunkte){
         String Passwort = this.PasswortAbfragen(Benutzername);
         
         String neuerDatensatz = Benutzername + " " + Passwort + " " + letztePunkte + " " + newHighScore;
