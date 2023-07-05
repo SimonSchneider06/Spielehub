@@ -501,11 +501,12 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     
     public void gameOverGruppeSichtbar(boolean sichtbar){
         buttonZurückZurSA.setVisible(sichtbar);
-        AnzeigePunkte.setText("Punkte: " + this.Punkte);
         AnzeigePunkte.setVisible(sichtbar);
+        
         String highScore = datenManager.getHighScore(this.Benutzername);
         AnzeigeHighscore.setText("HighScore: " + highScore);
         AnzeigeHighscore.setVisible(sichtbar);
+        
         GameOver.setVisible(sichtbar);
         AnzeigePunkte.setText("Punktestand: "+Punkte);
         
