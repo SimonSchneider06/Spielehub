@@ -6,67 +6,81 @@ import java.util.Random;
 import java.util.*;
 
 /**
- * Beschreiben Sie hier die Klasse Spielfeld.
+ * Beschreiben Sie hier die Klasse Fenster.
  * 
  * @author Simon Schneider + Maximilian Edenhofer 
  * @version 1.0
  */
 public class Fenster extends JFrame implements ActionListener,MouseListener, KeyListener
 {
-    // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
-    private JLabel labelPunkte;
-
-    private Dino dino;
     
-    private JLabel labelAnmelden;
-    private JTextField bn;
-    private JTextField pw;
-
-    private JLabel pwÜberprüfen;
-    private JLabel bnÜberprüfen;
-    private JLabel GameOver;
-    private JLabel AnzeigePunkte;
-    private JLabel AnzeigeHighscore;
-    private JLabel labelPÜ;
-    private JLabel labelSA;
-    private JLabel RErfolg;
-    private JLabel AnmeldenF;
-    private JButton buttonAnmelden;
-    private JButton buttonRegistrieren;
-    private JButton buttonSp1;
-    private JButton buttonBestätigen;
-    private JButton buttonAbbrechen;
-    private JButton buttonAbmelden; 
-    private JButton buttonZurück;
-    private JButton buttonZurückZurSA;
-    private JButton buttonPÜ;
-    private JButton buttonEV;
+   
+    //Startfenster:
+        private JLabel labelAnmelden;
+        private JTextField bn;
+        private JTextField pw;
+        private JButton buttonAnmelden;
+        private JButton buttonRegistrieren;
     
-    private JLabel RegistrierenFehler;
-    private JButton buttonRegistrierenFehler;
+    //Registrieren erfolgreich:
+        private JLabel RErfolg;
+        private JLabel pwÜberprüfen;
+        private JLabel bnÜberprüfen;
+        private JButton buttonBestätigen;
+        private JButton buttonAbbrechen;
     
-    private Thread gameLoopThread;
-    private String Benutzername;
-    private String Passwort;
-    private int LetztesSpielDinorun;
-    private int HighscoreDinorun;
+    //Registrieren fehlgeschlagen:
+        private JLabel RegistrierenFehler;
+        private JButton buttonRegistrierenFehler;
     
-    private Daten datenManager;
+    //Anmelden fehlgeschlagen:
+        private JLabel AnmeldenF;
+        private JButton buttonEV;
     
-    public int ground;
+    //Spieleauswahl (SA):
+        private JLabel labelSA;
+        private JButton buttonAbmelden;
+        private JButton buttonPÜ;
+        private JButton buttonSp1;
+            //evtl. buttonSp2, buttonSp3, ...
     
-    Random rand;
+    //Spiel 1 (SP1): Dinorun:
+        private JLabel labelPunkte;
+        private Dino dino;
     
-    GameLoop gameLoop;
-    public boolean gameOver;
+    //Game Over:
+        private JLabel GameOver;
+        private JLabel AnzeigePunkte;
+        private JLabel AnzeigeHighscore;
+        private JButton buttonZurückZurSA;
     
-    public int Punkte;
-    public int Highscore;
+    //Punkteübersicht (PÜ):
+        private JLabel labelPÜ;
+        private JButton buttonZurück;
     
-    public int i;
+    //Allgemeine Variablen:
+        private Thread gameLoopThread;
+        private String Benutzername;
+        private String Passwort;
+        private int LetztesSpielDinorun;
+        private int HighscoreDinorun;
+    
+        private Daten datenManager;
+    
+        public int ground;
+    
+        Random rand;
+    
+        GameLoop gameLoop;
+        public boolean gameOver;
+    
+        public int Punkte;
+        public int Highscore;
+    
+        public int i;
 
     /**
-     * Konstruktor für Objekte der Klasse Spielfeld
+     * Konstruktor für Objekte der Klasse Fenster
      */
     public Fenster()
     {
@@ -93,11 +107,12 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         dino = new Dino(ground);
         dino.gibBild().addKeyListener(this);
         
-        // labelPunkte, dinoBild hinzufügen
-        super.add(labelPunkte);
+        // labelPunkte, dinoBild hinzufügen                                   
+        super.add(labelPunkte);                             
         super.add(dino.gibBild());
 
-        //---------------------Anmelden------------------------
+        //---------------------Startfenster------------------------
+        //Anmelden label
         labelAnmelden = new JLabel();
         labelAnmelden.setText("Anmelden: ");
         labelAnmelden.setLocation(50,150);
@@ -120,7 +135,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         pw.setEnabled(true);
         pw.setFont(pw.getFont().deriveFont(56f));
 
-        //KnopfAnmelden
+        //KnopfAnmelden(=>Spieleauswahl/ Anmelden fehlgeschlagen
         buttonAnmelden = new JButton();
         buttonAnmelden.setText("Anmelden");
         buttonAnmelden.setLocation(320, 520);
@@ -128,7 +143,8 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         buttonAnmelden.setEnabled(true);
         buttonAnmelden.setFont(buttonAnmelden.getFont().deriveFont(56f));
         buttonAnmelden.addActionListener(this);
-        //KnopfRegistrieren
+        
+        //KnopfRegistrieren(=>Registrieren erfolgreich/ Registrieren fehlgeschlagen)
         buttonRegistrieren = new JButton();
         buttonRegistrieren.setText("Registrieren");
         buttonRegistrieren.setLocation(320,440);
@@ -136,19 +152,22 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         buttonRegistrieren.setEnabled(true);
         buttonRegistrieren.setFont(buttonRegistrieren.getFont().deriveFont(56f));
         buttonRegistrieren.addActionListener(this);
-        // Anmelden, Benutzernameeingabefeld,Passworteingabefeld, Knopf hinzufügen
+        
+        // Alles wird hinzufügen
         super.add(labelAnmelden);
         super.add(bn);
         super.add(pw);
         super.add(buttonAnmelden);
         super.add(buttonRegistrieren);
-        //---------------------Registrieren------------------------
+        //---------------------Registrierung erfolgreich------------------------
+        //Registrierung erfolgreich label
         RErfolg = new JLabel();
         RErfolg.setText("Die Registrierung war erfolgreich!");
         RErfolg.setLocation(250,40);
         RErfolg.setSize (900, 200);       
         RErfolg.setFont(RErfolg.getFont().deriveFont(46f));
-
+        
+        //KnopfBestätigen(=>Spieleauswahl)
         buttonBestätigen = new JButton();
         buttonBestätigen.setText("Bestätigen");
         buttonBestätigen.setLocation(320, 440);
@@ -156,7 +175,8 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         buttonBestätigen.setEnabled(true);
         buttonBestätigen.setFont(buttonBestätigen.getFont().deriveFont(56f));
         buttonBestätigen.addActionListener(this);
-
+        
+        //KnopfAbbrechen(=>Startfenster)
         buttonAbbrechen = new JButton();
         buttonAbbrechen.setText("Abbrechen");
         buttonAbbrechen.setLocation(320, 520);
@@ -164,31 +184,36 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         buttonAbbrechen.setEnabled(true);
         buttonAbbrechen.setFont(buttonBestätigen.getFont().deriveFont(56f));
         buttonAbbrechen.addActionListener(this);
-
+        
+        //Anzeige des Benutzernamens zur Überprüfung
         bnÜberprüfen = new JLabel();
         bnÜberprüfen.setText(Benutzername);
         bnÜberprüfen.setLocation(280,250);
         bnÜberprüfen.setSize (550,80);
         bnÜberprüfen.setFont(pw.getFont().deriveFont(56f));
-
+        
+        //Anzeige des Passworts zur Überprüfung
         pwÜberprüfen = new JLabel();
         pwÜberprüfen.setText(Passwort);
         pwÜberprüfen.setLocation(280,330);
         pwÜberprüfen.setSize (550,80);
         pwÜberprüfen.setFont(pw.getFont().deriveFont(56f));
-
+        
+        // Alles wird hinzufügen
         super.add(buttonBestätigen);
         super.add(RErfolg);
         super.add(bnÜberprüfen);
         super.add(pwÜberprüfen);
         super.add(buttonAbbrechen);
              //---------------------Anmeldungfehlgeschlagen------------------------
+        //Anmelden label
         AnmeldenF = new JLabel();
         AnmeldenF.setText("Die Anmeldung ist fehlgeschlagen!");
         AnmeldenF.setLocation(250,40);
         AnmeldenF.setSize (900, 200);       
         AnmeldenF.setFont(RErfolg.getFont().deriveFont(46f));
-
+        
+        //KnopfErneutVersuchen(=>Startfenster)
         buttonEV = new JButton();
         buttonEV.setText("Erneut versuchen");
         buttonEV.setLocation(320, 440);
@@ -197,17 +222,19 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         buttonEV.setFont(buttonBestätigen.getFont().deriveFont(56f));
         buttonEV.addActionListener(this);
 
-
+        // Alles wird hinzufügen
         super.add(buttonEV);
         super.add(AnmeldenF);
         
               //---------------------Registrierung fehlgeschlagen------------------------
+        //Registrieren fehlgeschlagen label
         RegistrierenFehler = new JLabel();
         RegistrierenFehler.setText("Der Benutzername existiert bereits!");
         RegistrierenFehler.setLocation(250,40);
         RegistrierenFehler.setSize (900, 200);       
         RegistrierenFehler.setFont(RErfolg.getFont().deriveFont(46f));
-
+        
+        //KnopfRegistrierenFehler(=>Startfenster)
         buttonRegistrierenFehler = new JButton();
         buttonRegistrierenFehler.setText("Erneut versuchen");
         buttonRegistrierenFehler.setLocation(320, 440);
@@ -216,18 +243,19 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         buttonRegistrierenFehler.setFont(buttonBestätigen.getFont().deriveFont(56f));
         buttonRegistrierenFehler.addActionListener(this);
 
-
+        // Alles wird hinzufügen
         super.add(buttonRegistrierenFehler);
         super.add(RegistrierenFehler);
         
                //---------------------Spieleauswahl(SA)------------------------
-
+        //Spieleauswahl label
         labelSA = new JLabel();
         labelSA.setText("Spieleauswahl: ");
         labelSA.setLocation(20,20);
         labelSA.setSize(350,50);
         labelSA.setFont(labelSA.getFont().deriveFont(46f));
-
+        
+        //KnopfSpiel1(Dinorun)(=>Startet das Spiel Dinorun)
         buttonSp1 = new JButton();
         buttonSp1.setText("Dinorun");
         buttonSp1.setLocation(20, 100);
@@ -235,7 +263,8 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         buttonSp1.setEnabled(true);
         buttonSp1.setFont(buttonSp1.getFont().deriveFont(56f));
         buttonSp1.addActionListener(this);
-
+        
+        //KnopfPunteübersicht(=>Punteübersicht)
         buttonPÜ = new JButton();
         buttonPÜ.setText("Punkteübersicht");
         buttonPÜ.setLocation(20, 650);
@@ -243,7 +272,8 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         buttonPÜ.setEnabled(true);
         buttonPÜ.setFont(buttonPÜ.getFont().deriveFont(56f));
         buttonPÜ.addActionListener(this);
-
+        
+        //KnopfAbmelden(=>Startfenster=)
         buttonAbmelden = new JButton();
         buttonAbmelden.setText("Abmelden");
         buttonAbmelden.setLocation(800, 650);
@@ -251,20 +281,22 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         buttonAbmelden.setEnabled(true);
         buttonAbmelden.setFont(buttonSp1.getFont().deriveFont(56f));
         buttonAbmelden.addActionListener(this);
-
+        
+        // Alles wird hinzufügen
         super.add(labelSA);
         super.add(buttonSp1);
         super.add(buttonAbmelden);
-
         super.add(buttonPÜ);
 
         //---------------------Punkteübersicht(PÜ)------------------------
+        //Punkteübersicht label
         labelPÜ = new JLabel();
         labelPÜ.setText("PÜ: ");
         labelPÜ.setLocation(50,150);
         labelPÜ.setSize(300,50);
         labelPÜ.setFont(labelPÜ.getFont().deriveFont(46f));
         
+        //KnopfZurück(=>Spieleauswahl)
         buttonZurück = new JButton();
         buttonZurück.setText("Zurück");
         buttonZurück.setLocation(20, 650);
@@ -273,18 +305,21 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         buttonZurück.setFont(buttonSp1.getFont().deriveFont(56f));
         buttonZurück.addActionListener(this);
         
+        // Alles wird hinzufügen
         super.add(buttonZurück);
         super.add(labelPÜ);
         //------------------------gameloop--------------------
         gameLoop = new GameLoop(dino,this);
 
              //---------------------Game Over------------------------
+        //GameOver label
         GameOver = new JLabel();
         GameOver.setText("Game Over");
         GameOver.setLocation(250,40);
         GameOver.setSize (900, 200);       
         GameOver.setFont(RErfolg.getFont().deriveFont(46f));
-
+        
+        //KnopfZurückZurSA(=>Spielauswahl)
         buttonZurückZurSA = new JButton();
         buttonZurückZurSA.setText("Erneut versuchen");
         buttonZurückZurSA.setLocation(320, 440);
@@ -293,28 +328,30 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         buttonZurückZurSA.setFont(buttonBestätigen.getFont().deriveFont(56f));
         buttonZurückZurSA.addActionListener(this);
         
-        
+        //Anzeige der Punkte
         AnzeigePunkte = new JLabel();
         AnzeigePunkte.setText("Punktestand: "+Punkte);
         AnzeigePunkte.setLocation(280,250);
-       AnzeigePunkte.setSize (550,80);
+        AnzeigePunkte.setSize (550,80);
         AnzeigePunkte.setFont(pw.getFont().deriveFont(56f));
-
+        
+        //Anzeige der Bestpunktzahl des Spiels
         AnzeigeHighscore = new JLabel();
         AnzeigeHighscore.setText("Highscore: " +Highscore);
         AnzeigeHighscore.setLocation(280,330);
         AnzeigeHighscore.setSize (550,80);
         AnzeigeHighscore.setFont(pw.getFont().deriveFont(56f));
         
+        // Alles wird hinzufügen
         super.add(buttonZurückZurSA);
         super.add(GameOver);
         super.add(AnzeigeHighscore);
         super.add(AnzeigePunkte);
 
-        // SpielfeldAufbauen();
-        AnmeldenAufbauen();
-        //Spieleauswahl();
-        //Registrieren();
+        
+        AnmeldenAufbauen();         //Startfenster wird aufgerufen
+        
+        //alle Knöpfe werden durch ActionListener inzeragierbar gemacht
         buttonAnmelden.addActionListener(this);
         buttonRegistrieren.addActionListener(this);
         buttonBestätigen.addActionListener(this);
@@ -324,6 +361,8 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         buttonZurück.addActionListener(this);
         buttonEV.addActionListener(this);
         buttonZurückZurSA.addActionListener(this);
+        
+        //alle Eingabefelder werden durch MouseListener interagierbar gemacht
         pw.addMouseListener(this);
         bn.addMouseListener(this);
 
@@ -331,15 +370,15 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
 
         // Fenster konfigurieren
         super.setLayout(null);
-        super.setSize(1300,750);
+        super.setSize(1300,750); //richtig: 1300,750   //Test:2000,1250
         super.setVisible(true);
     }
 
     /**
      * Zeigt das Spielfeld des Dinosaurierspiels an, wo der Dino rennt
      */
-    public void SpielfeldAufbauen(){
-        // sichtbar
+    public void SpielfeldAufbauen(){            // Spiel1 sichtbar
+        
         DinoSpielGruppeSichtbar(true);
         AnmeldeGruppeSichtbar(false);
         RegistrierGruppeSichtbar(false);
@@ -353,8 +392,8 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     /**
      * Zeigt den Anmeldebildschirm
      */
-    public void AnmeldenAufbauen(){
-        // Anmelden sichtbar
+    public void AnmeldenAufbauen(){             // Startbildschirm sichtbar
+        
         DinoSpielGruppeSichtbar(false);
         AnmeldeGruppeSichtbar(true);
         RegistrierGruppeSichtbar(false);
@@ -368,8 +407,8 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     /**
      * Zeigt die Spielauswahl
      */
-    public void Spieleauswahl(){
-        // Spieleauswahl sichtbar
+    public void Spieleauswahl(){                // Spieleauswahl sichtbar
+        
         DinoSpielGruppeSichtbar(false);
         AnmeldeGruppeSichtbar(false);
         RegistrierGruppeSichtbar(false);
@@ -380,8 +419,8 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         RegistrierenFehlerSichtbar(false);
     }
 
-    public void Registrieren(){
-        // Spieleauswahl sichtbar
+    public void Registrieren(){                 // Registrieren erfolgreich sichtbar
+        
 
         DinoSpielGruppeSichtbar(false);
         AnmeldeGruppeSichtbar(false);
@@ -395,7 +434,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         RegistrierenFehlerSichtbar(false);
     }
 
-    public void Punkteübersicht(){
+    public void Punkteübersicht(){              //Punkteübersicht sichtbar
         DinoSpielGruppeSichtbar(false);
         AnmeldeGruppeSichtbar(false);
         RegistrierGruppeSichtbar(false);
@@ -406,7 +445,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         gameOverGruppeSichtbar(false);
         RegistrierenFehlerSichtbar(false);
     }
-    public void Anmeldenfehlgeschlagen(){
+    public void Anmeldenfehlgeschlagen(){       //Anmelden fehlgeschlagen sichtbar
         DinoSpielGruppeSichtbar(false);
         AnmeldeGruppeSichtbar(false);
         RegistrierGruppeSichtbar(false);
@@ -419,7 +458,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         RegistrierenFehlerSichtbar(false);
         
     }
-    public void GameOver(){
+    public void GameOver(){                     //GameOver sichtbar
         DinoSpielGruppeSichtbar(false);
         AnmeldeGruppeSichtbar(false);
         RegistrierGruppeSichtbar(false);
@@ -432,7 +471,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     
     }
 
-    void DinoSpielGruppeSichtbar(boolean sichtbar){
+    void DinoSpielGruppeSichtbar(boolean sichtbar){         //Spiel1 sichtbar
         dino.gibBild().setVisible(sichtbar);
         labelPunkte.setVisible(sichtbar);
         if(sichtbar){
@@ -450,7 +489,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         }
     }
     
-    public void RegistrierenFehler(){
+    public void RegistrierenFehler(){           //Registrieren fehlgeschlagen sichtbar
         DinoSpielGruppeSichtbar(false);
         AnmeldeGruppeSichtbar(false);
         RegistrierGruppeSichtbar(false);
@@ -462,7 +501,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     
     }
 
-    void AnmeldeGruppeSichtbar(boolean sichtbar){
+    void AnmeldeGruppeSichtbar(boolean sichtbar){   //Zusammenfassen der Sichtbarkeiten der Elemente des Startfensters
         labelAnmelden.setVisible(sichtbar);
         bn.setVisible(sichtbar);
         pw.setVisible(sichtbar);
@@ -471,7 +510,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         
     }
 
-    void RegistrierGruppeSichtbar(boolean sichtbar){
+    void RegistrierGruppeSichtbar(boolean sichtbar){    //Zusammenfassen der Sichtbarkeiten der Elemente von Registrieren erfolgreich
         RErfolg.setVisible(sichtbar);
         buttonBestätigen.setVisible(sichtbar);
         buttonAbbrechen.setVisible(sichtbar);
@@ -480,7 +519,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         
 
     }
-      void AnmeldungFGruppeSichtbar(boolean sichtbar){
+      void AnmeldungFGruppeSichtbar(boolean sichtbar){  //Zusammenfassen der Sichtbarkeiten der Elemente von Anmelden fehlgeschlagen
         AnmeldenF.setVisible(sichtbar);
         buttonEV.setVisible(sichtbar);
         
@@ -488,7 +527,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
 
     }
 
-    void SpielauswahlGruppeSichtbar(boolean sichtbar){
+    void SpielauswahlGruppeSichtbar(boolean sichtbar){  //Zusammenfassen der Sichtbarkeiten der Elemente von Spieleauswahl
         labelSA.setVisible(sichtbar);
         buttonSp1.setVisible(sichtbar);
         buttonAbmelden.setVisible(sichtbar);
@@ -496,35 +535,31 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
 
     }
 
-    void PunkteübersichtGruppeSichtbar(boolean sichtbar){
+    void PunkteübersichtGruppeSichtbar(boolean sichtbar){ //Zusammenfassen der Sichtbarkeiten der Elemente von Punkteübersicht
         labelPÜ.setVisible(sichtbar);
         buttonZurück.setVisible(sichtbar);
 
     }
     
-    public void gameOverGruppeSichtbar(boolean sichtbar){
+    public void gameOverGruppeSichtbar(boolean sichtbar){   //Zusammenfassen der Sichtbarkeiten der Elemente von GameOver
         buttonZurückZurSA.setVisible(sichtbar);
         AnzeigePunkte.setVisible(sichtbar);
-        
-        int highScore = datenManager.CheckHighScore(this.Benutzername,this.Punkte);
-        AnzeigeHighscore.setText("HighScore: " + highScore);
         AnzeigeHighscore.setVisible(sichtbar);
-        
         GameOver.setVisible(sichtbar);
-        AnzeigePunkte.setText("Punktestand: "+Punkte);
+        
+        int highScore = datenManager.CheckHighScore(this.Benutzername,this.Punkte); //+Überprüfen und Anzeigen des aktuellen Highscores
+        AnzeigeHighscore.setText("HighScore: " + highScore);
+        
+        AnzeigePunkte.setText("Punktestand: "+Punkte); //+Anzeigen der erspielten Punkte
         
     }
     
-    public void RegistrierenFehlerSichtbar(boolean sichtbar){
+    public void RegistrierenFehlerSichtbar(boolean sichtbar){   //Zusammenfassen der Sichtbarkeiten der Elemente von Registrieren fehlgeschlagen
         RegistrierenFehler.setVisible(sichtbar);
         buttonRegistrierenFehler.setVisible(sichtbar);
     }
 
-    /**
-       Spawn Kaktus und füge ihn zur enemyList hinzu
-       
-       */
-    public void spawnEnemy(){
+    public void spawnEnemy(){               //Spawn Kaktus und füge ihn zur enemyList hinzu
         int pos_x = 1200 + rand.nextInt(300);
         Kaktus enemy = new Kaktus(pos_x,ground,gameLoop.kaktusSpeed);
         // add JLabel of enemy
@@ -534,7 +569,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         gameLoop.addEnemyToList(enemy);
     }
     
-    public void EnemyVisibility(Entity enemy,boolean sichtbar){
+    public void EnemyVisibility(Entity enemy,boolean sichtbar){     //Kakteen sichtbar 
         JLabel bild = enemy.gibBild();
         bild.setVisible(sichtbar);
     }
@@ -558,7 +593,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
 
     public void mouseExited(MouseEvent e) {}
 
-    public void mouseClicked(MouseEvent e) {
+    public void mouseClicked(MouseEvent e) {      //löscht beim Anklicken jeweils die Beschreibungen vom Benutzername- und Passworteingabefeld
         if(e.getSource() == pw)
             pw.setText("");
     else if(e.getSource() == bn)
@@ -568,7 +603,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     @Override public void keyReleased(KeyEvent e){
     }
 
-    @Override public void keyPressed(KeyEvent e){
+    @Override public void keyPressed(KeyEvent e){       //Beim drücken von Space springt Dino
 
         if(e.getKeyCode() == KeyEvent.VK_SPACE){
             JLabel dinoBild = dino.gibBild();
@@ -589,13 +624,13 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     public void actionPerformed(ActionEvent e){
 
 
-        if(e.getSource()==this.buttonAnmelden ){
+        if(e.getSource()==this.buttonAnmelden ){ //Bei Knopfdruck wenn bn und pw mit Datenbank übereinstimmen => Spieleauswahl
             this.Benutzername = bn.getText();
             this.Passwort = pw.getText();
              if(datenManager.PasswortAbfragen(Benutzername).equals(this.Passwort)){
                 this.Spieleauswahl();
                 }
-             else{
+             else{                              //sonst =>Anmeldung fehlgeschlagen
                 pwÜberprüfen.setText(Passwort);
                 bnÜberprüfen.setText(Benutzername);
                  this.Anmeldenfehlgeschlagen();
@@ -604,7 +639,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
            }        
 
     
-        else if(e.getSource()==this.buttonRegistrieren)
+        else if(e.getSource()==this.buttonRegistrieren) //Bei Knopfdruck wenn bn nicht vorhanden ist => Registrieren erfolgreich
         {
             this.Benutzername = bn.getText();
             if(!datenManager.BenutzernameEnthalten(this.Benutzername)){
@@ -613,21 +648,21 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
                 pwÜberprüfen.setText(Passwort);
                 bnÜberprüfen.setText(Benutzername);
             }
-            else{
+            else{                              //sonst =>Registrieren fehlgeschlagen
                 this.RegistrierenFehler();
             }
         }
 
     
 
-        else if(e.getSource() == this.buttonSp1){
+        else if(e.getSource() == this.buttonSp1){   //Bei Knopfdruck =>Spiel1 startet
             this.SpielfeldAufbauen();
         }
 
-        else if(e.getSource()==this.buttonAbbrechen)
-        {this.AnmeldenAufbauen();
-        }
-        else if(e.getSource()==this.buttonBestätigen)
+        // else if(e.getSource()==this.buttonAbbrechen)  //Bei Knopfdruck =>Startfenster
+        // {this.AnmeldenAufbauen();
+        // }
+        else if(e.getSource()==this.buttonBestätigen)   //Bei Knopfdruck =>bn+pw gespeichert,Spieleauswahl
 
         {
             if(i%2== 0){
@@ -638,19 +673,19 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
             }
         }
 
-        else if(e.getSource()==this.buttonAbmelden)
-        {this.AnmeldenAufbauen();}
+        // else if(e.getSource()==this.buttonAbmelden)     //Bei Knopfdruck =>Startfenster
+        // {this.AnmeldenAufbauen();}
 
         
-        else if(e.getSource()==this.buttonPÜ)
+        else if(e.getSource()==this.buttonPÜ)           //Bei Knopfdruck =>Punkteübersicht
         {this.Punkteübersicht();}
         
-        else if(e.getSource()==this.buttonZurück)
+        else if(e.getSource()==this.buttonZurück||e.getSource()==this.buttonZurückZurSA)       //Bei Knopfdruck von einem diesen =>Spieleauswahl
         {this.Spieleauswahl();}
-         else if(e.getSource()==this.buttonEV || e.getSource() == this.buttonRegistrierenFehler)
+         else if(e.getSource()==this.buttonEV || e.getSource() == this.buttonRegistrierenFehler||e.getSource()==this.buttonAbmelden||e.getSource()==this.buttonAbbrechen) //Bei Knopfdruck von einem dieser =>Startfenster
         {this.AnmeldenAufbauen();}
-        else if(e.getSource()==this.buttonZurückZurSA)
-        {this.Spieleauswahl();}
+        // else if(e.getSource()==this.buttonZurückZurSA)  //Bei Knopfdruck =>Spieleauswahl
+        // {this.Spieleauswahl();}
         
     
 
