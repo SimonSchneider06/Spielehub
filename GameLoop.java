@@ -25,6 +25,8 @@ public class GameLoop implements Runnable
     Fenster fenster;
     
     int kaktusSpeed;
+    
+    AudioPlayer audioPlayer;
     /**
      * Konstruktor für Objekte der Klasse GameLoop
      */
@@ -40,6 +42,8 @@ public class GameLoop implements Runnable
         rand = new Random();
         
         this.enemyList = new ArrayList<Entity>(); 
+        
+        audioPlayer = new AudioPlayer();
     }
     
     public void addEnemyToList(Entity e){
@@ -114,6 +118,7 @@ public class GameLoop implements Runnable
         //dino.Update();
         int loopCount = 0;
         this.fenster.Punkte = 0;
+        this.audioPlayer.playMusic("Musik/music.wav");
         //System.out.println("GameLoop.gameOver: "+ this.gameOver);
         while(!gameOver){
             this.dino.Update();
@@ -141,6 +146,7 @@ public class GameLoop implements Runnable
             loopCount++;
         }
         //this.allEnemysVisible(false);
+        this.audioPlayer.clip.stop();
         this.deleteAllEnemys();
         this.fenster.GameOver();
     }
