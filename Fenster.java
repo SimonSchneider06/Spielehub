@@ -270,13 +270,13 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         
         
         AnzeigePunkte = new JLabel();
-        AnzeigePunkte.setText("Punktestand :"+Punkte);
+        AnzeigePunkte.setText("Punktestand: "+Punkte);
         AnzeigePunkte.setLocation(280,250);
        AnzeigePunkte.setSize (550,80);
         AnzeigePunkte.setFont(pw.getFont().deriveFont(56f));
 
         AnzeigeHighscore = new JLabel();
-        AnzeigeHighscore.setText("Highscore :" +Highscore);
+        AnzeigeHighscore.setText("Highscore: " +Highscore);
         AnzeigeHighscore.setLocation(280,330);
         AnzeigeHighscore.setSize (550,80);
         AnzeigeHighscore.setFont(pw.getFont().deriveFont(56f));
@@ -468,7 +468,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         AnzeigePunkte.setVisible(sichtbar);
         AnzeigeHighscore.setVisible(sichtbar);
         GameOver.setVisible(sichtbar);
-        AnzeigePunkte.setText("Punktestand :"+Punkte);
+        AnzeigePunkte.setText("Punktestand: "+Punkte);
         
     }
 
