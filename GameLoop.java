@@ -25,6 +25,8 @@ public class GameLoop implements Runnable
     Fenster fenster;
     
     int kaktusSpeed;
+    
+    AudioPlayer audioPlayer;
     /**
      * Konstruktor für Objekte der Klasse GameLoop
      */
@@ -40,13 +42,20 @@ public class GameLoop implements Runnable
         rand = new Random();
         
         this.enemyList = new ArrayList<Entity>(); 
+        
+        audioPlayer = new AudioPlayer();
     }
     
     public void addEnemyToList(Entity e){
         this.enemyList.add(e);
     }
     
-    public void checkCollision(Entity enemy){
+    /**
+       Check the collision between an enemy and the dino
+       @param enemy: the enemy to check the collisions
+       @param index: the index of the enemy in the enemyList
+       */
+    public void checkCollision(Entity enemy,int index){
         JLabel enemyBild = enemy.gibBild();
         JLabel dinoBild = this.dino.gibBild();
         int sizePuffer = 30;
@@ -55,6 +64,7 @@ public class GameLoop implements Runnable
         
         if(dinoRect.intersects(enemyRect)){
             this.gameOver = true;
+            this.deleteEnemy(index,enemy);
         }
     }
     
@@ -65,11 +75,21 @@ public class GameLoop implements Runnable
        */
     public void deleteEnemy(int index,Entity e){
         JLabel enemyBild = e.gibBild();
-        if(enemyBild.getLocation().x < -100){
+        
             // Delete object
             this.fenster.EnemyVisibility(e,false);
             this.enemyList.remove(index);
             e = null;
+        
+    }
+    
+    /**
+       Delete All Enemys
+       */
+    public void deleteAllEnemys(){
+        for(int i = 0; i< this.enemyList.size(); i++){
+            Entity enemy = this.enemyList.get(i);
+            this.deleteEnemy(i,enemy);
         }
     }
     
@@ -79,14 +99,16 @@ public class GameLoop implements Runnable
     public void updateEnemys(){
         for(int i = 0; i < this.enemyList.size(); i ++){
             Entity enemy = this.enemyList.get(i);
-            this.deleteEnemy(i,enemy);
-            this.checkCollision(enemy);
+            if(enemy.gibBild().getLocation().x <= -100){
+                this.deleteEnemy(i,enemy);
+            }
+            this.checkCollision(enemy,i);
             enemy.Update();
         }
     }
     
-    public void enemysVisible(boolean sichtbar){
-        for(int i = 0; i< this.enemyList.size(); i++){
+    public void allEnemysVisible(boolean sichtbar){
+        for(int i = 0; i<= this.enemyList.size(); i++){
             Entity enemy = this.enemyList.get(i);
             this.fenster.EnemyVisibility(enemy, sichtbar);
         }
@@ -95,7 +117,9 @@ public class GameLoop implements Runnable
     public void run(){
         //dino.Update();
         int loopCount = 0;
-        System.out.println("GameLoop.gameOver: "+ this.gameOver);
+        this.fenster.Punkte = 0;
+        this.audioPlayer.playMusic("Musik/music.wav");
+        //System.out.println("GameLoop.gameOver: "+ this.gameOver);
         while(!gameOver){
             this.dino.Update();
             this.updateEnemys();
@@ -121,7 +145,9 @@ public class GameLoop implements Runnable
             }
             loopCount++;
         }
-        this.enemysVisible(false);
+        //this.allEnemysVisible(false);
+        this.audioPlayer.clip.stop();
+        this.deleteAllEnemys();
         this.fenster.GameOver();
     }
     }

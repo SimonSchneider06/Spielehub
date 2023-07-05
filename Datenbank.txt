@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 Benutzername Passwort 0 0;Simon 234 0 0;Simon 234 0 0;Benutzername Passwort 0 0;Benutzername Passwort 0 0;Benutzername Passwort 0 0;Benutzername Passwort 0 0;Benutzername Passwort 0 0;Benutzername Passwort 0 0;Benutzername Passwort 0 0;Benutzername Passwort 0 0;Benutzername Passwort 0 0;Benutzername Passwort 0 0;Benutzername Passwort 0 0;Benutzername Passwort 0 0;Benutzername Passwort 0 0;Benutzername Passwort 0 0;Benutzername Passwort 0 0;Benutzername Passwort 0 0;Benutzername Passwort 0 0;Benutzername Passwort 0 0;Benutzername Passwort 0 0;Benutzername Passwort 0 0;Benutzername Passwort 0 0;Benutzername Passwort 0 0;Benutzername Passwort 0 0;Benutzername Passwort 0 0;marion 1234 0 0;marion 1234 0 0;
+=======
+Max j32 3 93;Benutzername Passwort 1 5;
+>>>>>>> 4b48aa563b184e72db705c2f17965f57472e9fd5

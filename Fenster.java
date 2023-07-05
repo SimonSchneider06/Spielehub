@@ -42,6 +42,9 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     private JButton buttonPÜ;
     private JButton buttonEV;
     
+    private JLabel RegistrierenFehler;
+    private JButton buttonRegistrierenFehler;
+    
     private Thread gameLoopThread;
     private String Benutzername;
     private String Passwort;
@@ -59,12 +62,15 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     
     public int Punkte;
     public int Highscore;
+    
+    public int i;
 
     /**
      * Konstruktor für Objekte der Klasse Spielfeld
      */
     public Fenster()
     {
+        i = 0;
         // Datenmanager
         datenManager = new Daten();
         
@@ -195,6 +201,25 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         super.add(buttonEV);
         super.add(AnmeldenF);
         
+              //---------------------Registrierung fehlgeschlagen------------------------
+        RegistrierenFehler = new JLabel();
+        RegistrierenFehler.setText("Der Benutzername existiert bereits!");
+        RegistrierenFehler.setLocation(250,40);
+        RegistrierenFehler.setSize (900, 200);       
+        RegistrierenFehler.setFont(RErfolg.getFont().deriveFont(46f));
+
+        buttonRegistrierenFehler = new JButton();
+        buttonRegistrierenFehler.setText("Erneut versuchen");
+        buttonRegistrierenFehler.setLocation(320, 440);
+        buttonRegistrierenFehler.setSize (550, 70);
+        buttonRegistrierenFehler.setEnabled(true);
+        buttonRegistrierenFehler.setFont(buttonBestätigen.getFont().deriveFont(56f));
+        buttonRegistrierenFehler.addActionListener(this);
+
+
+        super.add(buttonRegistrierenFehler);
+        super.add(RegistrierenFehler);
+        
                //---------------------Spieleauswahl(SA)------------------------
 
         labelSA = new JLabel();
@@ -322,7 +347,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         PunkteübersichtGruppeSichtbar(false); 
         AnmeldungFGruppeSichtbar(false);
         gameOverGruppeSichtbar(false);
-
+        RegistrierenFehlerSichtbar(false);
     }
 
     /**
@@ -337,6 +362,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         PunkteübersichtGruppeSichtbar(false); 
         AnmeldungFGruppeSichtbar(false);
         gameOverGruppeSichtbar(false);
+        RegistrierenFehlerSichtbar(false);
     }
 
     /**
@@ -351,7 +377,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         PunkteübersichtGruppeSichtbar(false); 
         AnmeldungFGruppeSichtbar(false);
         gameOverGruppeSichtbar(false);
-
+        RegistrierenFehlerSichtbar(false);
     }
 
     public void Registrieren(){
@@ -366,7 +392,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         bnÜberprüfen.setVisible(true);
         pwÜberprüfen.setVisible(true);
         gameOverGruppeSichtbar(false);
-
+        RegistrierenFehlerSichtbar(false);
     }
 
     public void Punkteübersicht(){
@@ -378,7 +404,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         buttonAbmelden.setVisible(true);
         AnmeldungFGruppeSichtbar(false);
         gameOverGruppeSichtbar(false);
-        
+        RegistrierenFehlerSichtbar(false);
     }
     public void Anmeldenfehlgeschlagen(){
         DinoSpielGruppeSichtbar(false);
@@ -390,7 +416,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         bnÜberprüfen.setVisible(true);
         pwÜberprüfen.setVisible(true);
         gameOverGruppeSichtbar(false);
-        
+        RegistrierenFehlerSichtbar(false);
         
     }
     public void GameOver(){
@@ -401,6 +427,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         PunkteübersichtGruppeSichtbar(false); 
         AnmeldungFGruppeSichtbar(false);
         gameOverGruppeSichtbar(true);
+        RegistrierenFehlerSichtbar(false);
         gameLoopThread.stop();
     
     }
@@ -421,6 +448,18 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
                 System.out.println(e);
             }
         }
+    }
+    
+    public void RegistrierenFehler(){
+        DinoSpielGruppeSichtbar(false);
+        AnmeldeGruppeSichtbar(false);
+        RegistrierGruppeSichtbar(false);
+        SpielauswahlGruppeSichtbar(false);
+        PunkteübersichtGruppeSichtbar(false); 
+        AnmeldungFGruppeSichtbar(false);
+        gameOverGruppeSichtbar(false);
+        RegistrierenFehlerSichtbar(true);
+    
     }
 
     void AnmeldeGruppeSichtbar(boolean sichtbar){
@@ -466,10 +505,19 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     public void gameOverGruppeSichtbar(boolean sichtbar){
         buttonZurückZurSA.setVisible(sichtbar);
         AnzeigePunkte.setVisible(sichtbar);
+        
+        int highScore = datenManager.CheckHighScore(this.Benutzername,this.Punkte);
+        AnzeigeHighscore.setText("HighScore: " + highScore);
         AnzeigeHighscore.setVisible(sichtbar);
+        
         GameOver.setVisible(sichtbar);
         AnzeigePunkte.setText("Punktestand: "+Punkte);
         
+    }
+    
+    public void RegistrierenFehlerSichtbar(boolean sichtbar){
+        RegistrierenFehler.setVisible(sichtbar);
+        buttonRegistrierenFehler.setVisible(sichtbar);
     }
 
     /**
@@ -555,16 +603,20 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
 
            }        
 
-
-    else if(e.getSource()==this.buttonRegistrieren)
-    {
-        this.Registrieren();
-        Benutzername = bn.getText();
-        Passwort = pw.getText();
-        pwÜberprüfen.setText(Passwort);
-        bnÜberprüfen.setText(Benutzername);
-        
-    }
+    
+        else if(e.getSource()==this.buttonRegistrieren)
+        {
+            this.Benutzername = bn.getText();
+            if(!datenManager.BenutzernameEnthalten(this.Benutzername)){
+                this.Registrieren();
+                Passwort = pw.getText();
+                pwÜberprüfen.setText(Passwort);
+                bnÜberprüfen.setText(Benutzername);
+            }
+            else{
+                this.RegistrierenFehler();
+            }
+        }
 
     
 
@@ -578,8 +630,12 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         else if(e.getSource()==this.buttonBestätigen)
 
         {
-        datenManager.DatensatzEinfuegen( Benutzername+" "+Passwort+ " "+LetztesSpielDinorun+" "+HighscoreDinorun );
-        this.Spieleauswahl();
+            if(i%2== 0){
+                System.out.println(i);
+                datenManager.DatensatzEinfuegen( Benutzername+" "+Passwort+ " "+LetztesSpielDinorun+" "+HighscoreDinorun );
+                this.Spieleauswahl();
+                i++;
+            }
         }
 
         else if(e.getSource()==this.buttonAbmelden)
@@ -591,7 +647,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         
         else if(e.getSource()==this.buttonZurück)
         {this.Spieleauswahl();}
-         else if(e.getSource()==this.buttonEV)
+         else if(e.getSource()==this.buttonEV || e.getSource() == this.buttonRegistrierenFehler)
         {this.AnmeldenAufbauen();}
         else if(e.getSource()==this.buttonZurückZurSA)
         {this.Spieleauswahl();}
