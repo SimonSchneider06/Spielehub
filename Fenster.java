@@ -62,12 +62,15 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     
     public int Punkte;
     public int Highscore;
+    
+    public int i;
 
     /**
      * Konstruktor für Objekte der Klasse Spielfeld
      */
     public Fenster()
     {
+        i = 0;
         // Datenmanager
         datenManager = new Daten();
         
@@ -600,20 +603,20 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
 
            }        
 
-
-    else if(e.getSource()==this.buttonRegistrieren)
-    {
-        this.Benutzername = bn.getText();
-        if(!datenManager.BenutzernameEnthalten(this.Benutzername)){
-            this.Registrieren();
-            Passwort = pw.getText();
-            pwÜberprüfen.setText(Passwort);
-            bnÜberprüfen.setText(Benutzername);
+    
+        else if(e.getSource()==this.buttonRegistrieren)
+        {
+            this.Benutzername = bn.getText();
+            if(!datenManager.BenutzernameEnthalten(this.Benutzername)){
+                this.Registrieren();
+                Passwort = pw.getText();
+                pwÜberprüfen.setText(Passwort);
+                bnÜberprüfen.setText(Benutzername);
+            }
+            else{
+                this.RegistrierenFehler();
+            }
         }
-        else{
-            this.RegistrierenFehler();
-        }
-    }
 
     
 
@@ -627,8 +630,12 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         else if(e.getSource()==this.buttonBestätigen)
 
         {
-            datenManager.DatensatzEinfuegen( Benutzername+" "+Passwort+ " "+LetztesSpielDinorun+" "+HighscoreDinorun );
-            this.Spieleauswahl();
+            if(i%2== 0){
+                System.out.println(i);
+                datenManager.DatensatzEinfuegen( Benutzername+" "+Passwort+ " "+LetztesSpielDinorun+" "+HighscoreDinorun );
+                this.Spieleauswahl();
+                i++;
+            }
         }
 
         else if(e.getSource()==this.buttonAbmelden)
