@@ -12,3 +12,4 @@ VERSION oder DATUM:
 WIE IST DAS PROJEKT ZU STARTEN:
 AUTOR(EN):
 BENUTZERHINWEISE:
+Die Verwendete Musik ist vom "Clear Code" Tutorial "The ultimate introduction to Pygame", found under this link "https://opengameart.org/content/5-chiptunes-action"
