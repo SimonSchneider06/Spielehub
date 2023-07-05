@@ -507,6 +507,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         AnzeigeHighscore.setText("HighScore: " + highScore);
         AnzeigeHighscore.setVisible(sichtbar);
         GameOver.setVisible(sichtbar);
+        AnzeigePunkte.setText("Punktestand: "+Punkte);
         
     }
     
