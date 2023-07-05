@@ -91,7 +91,7 @@ public class Daten {
 
             while(null!=(text=FileReader.readLine())){         //lesen jeder Zeile  
                  inhalt = inhalt + text;
-                 //System.out.println(inhalt);
+                 System.out.println("INHALT: " + inhalt);
             }
 
         } catch (Exception e) {
@@ -113,6 +113,82 @@ public class Daten {
         }
 
     }
+    
+    /**
+       Löscht einen Datensatz, vom entsprechendem Benutzernamen aus der Datenbank
+       @param Benutzername = String;
+       */
+    public void DatensatzLöschen(String Benutzername){
+        String inhalt="";
+             try {
+            java.io.BufferedReader FileReader=                      //ein Reader um die Datei Zeilenweise auszulesen
+                new java.io.BufferedReader(
+                    new java.io.FileReader(
+                        new java.io.File("Datenbank.txt")
+                    )
+                );
+
+            String text="";
+            while(null!=(text=FileReader.readLine())){         //lesen jeder Zeile  
+                String[] split=text.split(";");                //Die Datensätze werden mit Strichpunkt getrennt
+                for (String word : split) {
+                    String[] zeile = word.split(" "); //Die einzelnen Wörter eines Datensatzes mit Leerzeichen
+                    //System.out.println("Benutzername: " + zeile[0] + "   Passwort: " + zeile[1]+ "   LetztesSpielDinorun:  " +zeile[2]+ "    HighscoreDinorun: " + zeile[3]);
+                    if(!zeile[0].equals(Benutzername)){
+                        //System.out.println("------------------" + zeile[index]);
+                        inhalt += word + ";";
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //System.out.println(inhalt);
+        
+        try (FileWriter writer = new FileWriter("Datenbank.txt");
+        BufferedWriter bw = new BufferedWriter(writer)) {
+            
+            //System.out.println("Löschen/neuer Inhalt: " + inhalt);
+            bw.write(inhalt);
+
+        } catch (IOException e) {
+            System.err.format("IOException: %s%n", e);
+        }
+    
+    }
+    
+    /**
+       Ändert die Daten des jeweiligen Benutzers
+       @param Benutzername = String;
+       @param neuerDatensatz = String; z.B. "Benutzername Passwort LetztePunkte HighScore"
+       */
+    public void DatensatzÄndern(String Benutzername, String neuerDatensatz){
+        this.DatensatzLöschen(Benutzername);
+        this.DatensatzEinfuegen(neuerDatensatz);
+    }
+    
+    public void CheckHighScore(String Benutzername, int Punkte){
+        int HighScore = Integer.parseInt(this.getHighScore(Benutzername));
+        if(Punkte > HighScore){
+            this.setHighScore(Benutzername, Punkte);
+        }
+        
+    }
+    
+    /**
+       Setzt den HighScore
+       @param Benutzername = String; der Benutzername, wo der HighScore geändert werden soll
+       @param newHighScore = int; der neue HighScore;
+       */
+    public void setHighScore(String Benutzername,int newHighScore){
+        int letztePunkte = Integer.parseInt(this.getLastPoints(Benutzername));
+        String Passwort = this.PasswortAbfragen(Benutzername);
+        
+        String neuerDatensatz = Benutzername + " " + Passwort + " " + letztePunkte + " " + newHighScore;
+        this.DatensatzÄndern(Benutzername, neuerDatensatz);
+    }
+    
     /**
        Get the HighScore by the Username
        @param Benutzername = String
@@ -120,8 +196,13 @@ public class Daten {
     public String getHighScore(String Benutzername){
         return this.getDatenbankEntryByUserName(Benutzername, 3);
     }
+    
     public String PasswortAbfragen(String Benutzername){
         return this.getDatenbankEntryByUserName(Benutzername, 1);
+    }
+    
+    public String getLastPoints(String Benutzername){
+        return this.getDatenbankEntryByUserName(Benutzername, 2);
     }
     /**
        Returns a selected Entry of the Database
