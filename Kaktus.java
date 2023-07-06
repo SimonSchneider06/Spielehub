@@ -29,10 +29,19 @@ public class Kaktus extends Entity
         this.bild.setLocation(this.bild.getLocation().x - this.speed,this.bild.getLocation().y);
     }
     
+    /**
+       Erhöht den Speed der Kakteen
+       @param increment = int; gibt an, um wie viel die Geschwindigkeit
+                               erhöht werden soll.
+       */
     public void increaseSpeed(int increment){
         speed += increment;
     }
 
+    /**
+       Update Methode
+       Lässt die Kakteen nach links bewegen
+       */
     @Override public void Update(){
         this.Move_left();
     }

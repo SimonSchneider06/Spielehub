@@ -47,6 +47,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
     //Spiel 1 (SP1): Dinorun:
         private JLabel labelPunkte;
         private Dino dino;
+        private JLabel SpielBoden;
     
     //Game Over:
         private JLabel GameOver;
@@ -93,6 +94,10 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         this.gameOver = false;
        
         //---------------------Spielfeld------------------------
+        
+        // ground
+        ground = 400;
+        
         // Punkte label
         this.Punkte = 0;
         labelPunkte = new JLabel();
@@ -101,8 +106,11 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         labelPunkte.setSize(300,50);
         labelPunkte.setFont(labelPunkte.getFont().deriveFont(46f));
         
-        // ground
-        ground = 400;
+        // SpielBoden
+        SpielBoden = new JLabel();
+        SpielBoden.setIcon(new ImageIcon("Bilder-Transparent/Umgebung/Boden2.png"));
+        SpielBoden.setLocation(0,this.ground + 49);
+        SpielBoden.setSize(1500,100);
 
         dino = new Dino(ground);
         dino.gibBild().addKeyListener(this);
@@ -110,6 +118,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         // labelPunkte, dinoBild hinzufügen                                   
         super.add(labelPunkte);                             
         super.add(dino.gibBild());
+        super.add(SpielBoden);
 
         //---------------------Startfenster------------------------
         //Anmelden label
@@ -473,6 +482,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
 
     void DinoSpielGruppeSichtbar(boolean sichtbar){         //Spiel1 sichtbar
         dino.gibBild().setVisible(sichtbar);
+        SpielBoden.setVisible(sichtbar);
         labelPunkte.setVisible(sichtbar);
         if(sichtbar){
             try{

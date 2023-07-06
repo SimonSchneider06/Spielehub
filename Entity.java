@@ -76,9 +76,15 @@ public class Entity
         //bild.setIcon(new ImageIcon(bild_ordner_pfad + img_number + ".png"));
     }
     
+    /**
+       Returns EntityBild (= JLabel)
+       */
     JLabel gibBild(){
         return bild;
     }
+    /**
+       Updates the Entity
+       */
     public void Update(){
         Animate();
     }

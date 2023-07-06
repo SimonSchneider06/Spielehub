@@ -46,6 +46,10 @@ public class GameLoop implements Runnable
         audioPlayer = new AudioPlayer();
     }
     
+    /**
+     * Add an Enemy to the EnemyList
+     * @param e = Entity, the enemy to add
+       */
     public void addEnemyToList(Entity e){
         this.enemyList.add(e);
     }
@@ -87,7 +91,8 @@ public class GameLoop implements Runnable
        Delete All Enemys
        */
     public void deleteAllEnemys(){
-        for(int i = 0; i< this.enemyList.size(); i++){
+        // loop von hinten durch die Liste
+        for(int i = this.enemyList.size() - 1; i>=0; i--){
             Entity enemy = this.enemyList.get(i);
             this.deleteEnemy(i,enemy);
         }
@@ -106,16 +111,15 @@ public class GameLoop implements Runnable
             enemy.Update();
         }
     }
-    
-    public void allEnemysVisible(boolean sichtbar){
-        for(int i = 0; i<= this.enemyList.size(); i++){
-            Entity enemy = this.enemyList.get(i);
-            this.fenster.EnemyVisibility(enemy, sichtbar);
-        }
-    }
-    
+
+    /**
+       Die GameLoop
+       Updated Dino und Enemys, spawnt neue Enemys
+       Erhöht die Spielschwierigkeit
+       */
     public void run(){
         //dino.Update();
+        int spawnChance = 20;
         int loopCount = 0;
         this.fenster.Punkte = 0;
         this.audioPlayer.playMusic("Musik/music.wav");
@@ -124,14 +128,22 @@ public class GameLoop implements Runnable
             this.dino.Update();
             this.updateEnemys();
             
-            // alle 30 Runden, jede Runde 50ms -> alle 1,5s
-            // kaktus spawnen
-            if(loopCount % 40 == 0){
-                this.fenster.spawnEnemy();
+            // kaktus spawnen mit wahrscheinlichkeit
+            if(rand.nextInt(spawnChance) == 0){
+                // to avoid having to many enemys
+                if(this.enemyList.size() <= 2){
+                    this.fenster.spawnEnemy();
+                }
             }
+            // nach 100 loops Speed und Punkte erhöhen
+            // 1 loop dauert 50ms
+            //  -> alle 5s
             if(loopCount % 100 == 0){
                 this.fenster.erhöhePunkte(1);
                 this.kaktusSpeed += 3;
+            }
+            if(loopCount % 1000 == 0){
+                spawnChance -= 1;
             }
             
             //System.out.println("--START--");

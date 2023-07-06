@@ -37,7 +37,9 @@ public class Dino extends Entity
         
     }
     
-    
+    /**
+       Lets the dino Jump
+       */
     public void Jump(){
         if(this.isJumping){
             this.canjump = false;
@@ -53,10 +55,10 @@ public class Dino extends Entity
         }   
     }
     
-    public void checkCollision(){
-        
-    }
-    
+    /**
+       Updates the dino
+       calls Jump & Animate Method
+       */
     @Override public void Update(){
         Animate();
         this.Jump();

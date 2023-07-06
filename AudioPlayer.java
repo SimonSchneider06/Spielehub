@@ -23,6 +23,11 @@ public class AudioPlayer
         // Instanzvariable initialisieren
         
     }
+    
+    /**
+       Spielt Musik ab
+       @param musicLoc = String; the path to the music file
+       */
     void playMusic(String musicLoc){
                  try {
                          File musicPath = new File(musicLoc);
@@ -31,7 +36,7 @@ public class AudioPlayer
                                   this.clip = AudioSystem.getClip();
                                   this.clip.open(audioInput);
                                   this.clip.start();
-                                 //JOptionPane.showMessageDialog(null,"Press ok to stop playing");
+                                 
 
                            }
                           else{

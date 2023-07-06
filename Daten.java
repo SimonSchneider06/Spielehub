@@ -91,14 +91,14 @@ public class Daten {
 
             while(null!=(text=FileReader.readLine())){         //lesen jeder Zeile  
                  inhalt = inhalt + text;
-                 System.out.println("INHALT: " + inhalt);
+                 //System.out.println("INHALT: " + inhalt);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
         // Neuen Datensatz an bereits enthaltene Datensätze anhängen
-        System.out.println("PRINT: " + inhalt);
+        //System.out.println("PRINT: " + inhalt);
         inhalt = inhalt + daten + ";";
         //System.out.println(inhalt);
         
@@ -216,15 +216,24 @@ public class Daten {
         return this.getDatenbankEntryByUserName(Benutzername, 3);
     }
     
+    /**
+       Get the Passwort from the Username
+       @param Benutzername = String
+       */
     public String PasswortAbfragen(String Benutzername){
         return this.getDatenbankEntryByUserName(Benutzername, 1);
     }
     
+    /**
+       Get the LastPoints from the Username
+       @param Benutzername = String
+       */
     public String getLastPoints(String Benutzername){
         return this.getDatenbankEntryByUserName(Benutzername, 2);
     }
+    
     /**
-       Returns a selected Entry of the Database
+       Returns a selected Entry of the Database; Returnvalue = String
        @param Benutzername = String; the Benutzername, from which to get the data
        @param index = int; the index of the Database Entry
        */
