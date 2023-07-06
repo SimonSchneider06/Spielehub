@@ -541,7 +541,7 @@ public class Fenster extends JFrame implements ActionListener,MouseListener, Key
         labelSA.setVisible(sichtbar);
         buttonSp1.setVisible(sichtbar);
         buttonAbmelden.setVisible(sichtbar);
-        buttonPÜ.setVisible(sichtbar);
+        buttonPÜ.setVisible(false);
 
     }
 
