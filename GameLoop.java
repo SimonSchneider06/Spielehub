@@ -123,6 +123,7 @@ public class GameLoop implements Runnable
         int loopCount = 0;
         this.fenster.Punkte = 0;
         this.audioPlayer.playMusic("Musik/music.wav");
+        this.kaktusSpeed = 25;
         //System.out.println("GameLoop.gameOver: "+ this.gameOver);
         while(!gameOver){
             this.dino.Update();
